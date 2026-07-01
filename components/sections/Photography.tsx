@@ -3,14 +3,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { photography } from "@/content/photography";
+import { photography, aspectClass } from "@/content/photography";
 import { Lightbox } from "@/components/photography/Lightbox";
-
-const aspectClass: Record<string, string> = {
-  portrait: "aspect-[3/4]",
-  square: "aspect-square",
-  landscape: "aspect-[4/3]",
-};
 
 export function Photography() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);

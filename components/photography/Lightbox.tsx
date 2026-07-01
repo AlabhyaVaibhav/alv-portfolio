@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import type { PhotoSlot } from "@/content/photography";
+import { aspectClass, type PhotoSlot } from "@/content/photography";
 
 type LightboxProps = {
   slots: PhotoSlot[];
@@ -13,6 +14,15 @@ type LightboxProps = {
 
 export function Lightbox({ slots, activeIndex, onClose, onNavigate }: LightboxProps) {
   const slot = activeIndex !== null ? slots[activeIndex] : null;
+
+  useEffect(() => {
+    if (!slot) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [slot, onClose]);
 
   return (
     <AnimatePresence>
@@ -38,10 +48,12 @@ export function Lightbox({ slots, activeIndex, onClose, onNavigate }: LightboxPr
                 alt={slot.alt}
                 width={1200}
                 height={1500}
-                className="h-full w-full rounded-sm object-contain"
+                className={`w-full rounded-sm object-contain ${aspectClass[slot.aspect]}`}
               />
             ) : (
-              <div className="flex aspect-[3/4] w-full items-center justify-center rounded-sm bg-paper/10 text-paper/60">
+              <div
+                className={`flex w-full items-center justify-center rounded-sm bg-paper/10 text-paper/60 ${aspectClass[slot.aspect]}`}
+              >
                 {slot.alt}
               </div>
             )}

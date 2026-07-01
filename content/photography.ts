@@ -7,6 +7,12 @@ export type PhotoSlot = {
   src?: string;
 };
 
+export const aspectClass: Record<PhotoSlot["aspect"], string> = {
+  portrait: "aspect-[3/4]",
+  square: "aspect-square",
+  landscape: "aspect-[4/3]",
+};
+
 export const photography: PhotoSlot[] = [
   { id: "01", alt: "Photograph 01", aspect: "portrait" },
   { id: "02", alt: "Photograph 02", aspect: "square" },
