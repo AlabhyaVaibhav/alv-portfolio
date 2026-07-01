@@ -2,6 +2,7 @@ import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Work } from "@/components/sections/Work";
 import { Photography } from "@/components/sections/Photography";
+import { Twine } from "@/components/sections/Twine";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <About />
       <Work />
       <Photography />
+      <Twine />
     </main>
   );
 }
