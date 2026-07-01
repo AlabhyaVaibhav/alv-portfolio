@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { workHistory } from "@/content/work";
 
@@ -34,9 +37,20 @@ export function Work() {
                     </ScrollReveal>
                     <ul className="mt-3 space-y-2">
                       {position.bullets.map((bullet, index) => (
-                        <ScrollReveal key={bullet} delay={0.08 * (index + 1)}>
-                          <li className="text-ink/75">{bullet}</li>
-                        </ScrollReveal>
+                        <motion.li
+                          key={bullet}
+                          className="text-ink/75"
+                          initial={{ opacity: 0, y: 32 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true, amount: 0.3 }}
+                          transition={{
+                            duration: 0.6,
+                            delay: 0.08 * (index + 1),
+                            ease: "easeOut",
+                          }}
+                        >
+                          {bullet}
+                        </motion.li>
                       ))}
                     </ul>
                   </div>
