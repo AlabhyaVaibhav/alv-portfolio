@@ -42,3 +42,6 @@ next-env.d.ts
 
 # scratch tracking (not part of the site)
 .superpowers/
+
+# local Claude Code settings (machine-specific paths)
+.claude/settings.local.json
