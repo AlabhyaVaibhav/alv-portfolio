@@ -6,12 +6,13 @@ import { chapters } from "@/content/chapters";
 import { projects } from "@/content/projects";
 import { featuredFirst } from "@/lib/projectOrder";
 
-// Planning artifacts peeking out from under the sheet.
+// Planning artifacts peeking out from under the sheet. The bottom-right of the mat is kept clear for
+// the carousel's "more projects this way" hint, which yellow chalk can't be read over paper.
 const OBJECTS: ScatterItem[] = [
   { name: "kanban-mini-board", x: 52, y: -3, rotate: -4, from: "top", mobile: null },
-  { name: "roadmap-strip", x: 6, y: 76, rotate: -3, from: "left", mobile: { x: 6, y: 78 } },
-  { name: "prioritization-cards", x: 70, y: 77, rotate: 6, from: "right", mobile: null },
-  { name: "pencil", x: 40, y: 88, rotate: -8, from: "bottom", mobile: null },
+  { name: "roadmap-strip", x: 6, y: 78, rotate: -3, from: "left", mobile: { x: 4, y: 92 } },
+  { name: "prioritization-cards", x: 31, y: 0, rotate: -7, from: "top", mobile: null },
+  { name: "pencil", x: 33, y: 90, rotate: -8, from: "bottom", mobile: null },
 ];
 
 export function SideProjects() {

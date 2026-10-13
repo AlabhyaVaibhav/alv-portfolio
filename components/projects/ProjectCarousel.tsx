@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { usePrefersReducedMotion } from "@/components/mat/usePrefersReducedMotion";
+import { ChalkOutline } from "@/components/paper/ChalkOutline";
 import { Tape } from "@/components/paper/Tape";
 import type { Project } from "@/content/projects";
 import { carouselEdges } from "@/lib/carousel";
@@ -60,14 +61,21 @@ export function ProjectCarousel({ projects }: { projects: Project[] }) {
         ))}
       </div>
       {scrollable && (
-        // Sits on the mat just below the sheet, clear of its edge, so it costs the sheet no height.
-        <div className="absolute right-5 top-[calc(100%+12px)] flex gap-2.5 md:right-8 md:top-[calc(100%+14px)]">
-          <button type="button" aria-label="Previous project" onClick={() => step(-1)} disabled={edges.atStart} className={arrow}>
-            ←
-          </button>
-          <button type="button" aria-label="Next project" onClick={() => step(1)} disabled={edges.atEnd} className={arrow}>
-            →
-          </button>
+        // Sits on the mat just below the sheet, clear of its edge, so it costs the sheet no height. The
+        // chalk note and loop tell visitors the sheet holds more than fits: it scrolls sideways.
+        <div className="absolute right-5 top-[calc(100%+14px)] flex items-center gap-5 md:right-8 md:top-[calc(100%+18px)] md:gap-7">
+          <p className="max-w-[46vw] text-right font-hand text-[17px] leading-tight text-sticky-yellow md:max-w-none md:text-[24px]">
+            more projects this way. use the arrows or swipe →
+          </p>
+          <div className="relative flex shrink-0 gap-2.5">
+            <ChalkOutline color="#f08a4b" className="!-inset-3 !h-[calc(100%+1.5rem)] !w-[calc(100%+1.5rem)]" />
+            <button type="button" aria-label="Previous project" onClick={() => step(-1)} disabled={edges.atStart} className={arrow}>
+              ←
+            </button>
+            <button type="button" aria-label="Next project" onClick={() => step(1)} disabled={edges.atEnd} className={arrow}>
+              →
+            </button>
+          </div>
         </div>
       )}
     </div>

@@ -8,12 +8,14 @@ const LOOP = "M10 5 C 35 0, 72 -1, 95 5 C 101 30, 101 70, 96 95 C 70 101, 30 101
 type ChalkOutlineProps = {
   // Seconds before the loop starts drawing itself.
   delay?: number;
+  // Chalk colour: white by default; orange or yellow to call something out.
+  color?: string;
   className?: string;
 };
 
 // A chalky marker loop around its parent (which needs `relative`). Drawn with a pen-draw animation and
 // a rough edge so it reads as hand-drawn on the mat, not a CSS border.
-export function ChalkOutline({ delay = 0, className = "" }: ChalkOutlineProps) {
+export function ChalkOutline({ delay = 0, color = "#fbf7ea", className = "" }: ChalkOutlineProps) {
   // A per-instance filter id: a shared one can resolve to a copy inside a hidden element, which
   // Chrome won't render, taking the outline with it.
   const filterId = `chalk-${useId().replace(/[^a-zA-Z0-9]/g, "")}`;
@@ -33,7 +35,7 @@ export function ChalkOutline({ delay = 0, className = "" }: ChalkOutlineProps) {
         d={LOOP}
         pathLength={1}
         fill="none"
-        stroke="#fbf7ea"
+        stroke={color}
         strokeWidth={2.6}
         strokeLinecap="round"
         strokeLinejoin="round"
