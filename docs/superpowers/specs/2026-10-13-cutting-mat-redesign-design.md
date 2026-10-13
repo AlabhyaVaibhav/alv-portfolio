@@ -45,15 +45,15 @@ Removed: `components/sections/*` (Hero, About, Work, Photography, Twine, Contact
 New units (one file each, each with one job):
 
 - `components/mat/Mat.tsx` — fixed full-viewport mat background. No props.
-- `components/mat/Chapter.tsx` — a tall section (default `250vh`) containing a `sticky top-0 h-screen` stage. Computes scroll progress 0→1 with `useScroll({ target, offset: ["start start", "end end"] })` and provides it via React context. Props: `id`, `label`, `side: "build" | "life" | "both"`, `children`. Registers itself for chapter navigation.
-- `components/mat/Piece.tsx` — positions and animates one object inside a chapter stage. Props: `x`, `y` (percent of stage), `rotate`, `from: "left" | "right" | "top" | "bottom"`, `enterAt` (0–1, default staggered 0.05–0.25), optional `mobile: { x, y, rotate, scale }`. Reads chapter progress from context and maps it with `useTransform`:
-  - `[enterAt, enterAt + 0.15]` → slide from off-stage on `from` edge (with extra rotation) to rest;
+- `components/mat/Chapter.tsx` — a tall section (`250vh`) acting as a scroll spacer, with a `position: fixed` full-viewport stage. Computes scroll progress 0→1 with `useScroll({ target, offset: ["start end", "end end"] })`, so consecutive chapters' progress ranges meet with no gap, and provides it via context (`chapterContext.ts`). Props: `meta: ChapterMeta` (id, number, title, side from `content/chapters.ts`). The stage is `inert` unless its spread is on the mat (progress 0.2–0.85; first chapter from the top, last chapter to the end), so focus never lands on off-screen pieces. Layout classes for reduced motion come from CSS `motion-reduce:` variants so the static HTML is right on first paint.
+- `components/mat/Piece.tsx` — positions and animates one object inside a chapter stage. Props: `x`, `y` (percent of stage), `rotate`, `from: "left" | "right" | "top" | "bottom"`, `enterAt` (0–1), optional `mobile: { x, y, rotate, scale }`, `hideOnMobile`. Reads chapter progress from context and maps it through `lib/pieceTrack.ts`:
+  - `[enterAt, enterAt + 0.15]` → slide from off-stage on `from` edge (with extra rotation) to rest, easing out;
   - hold at rest until `0.8`;
-  - `[0.8, 1]` → swept off toward the left with added rotation.
+  - `[0.8, 1]` → swept off toward the left with added rotation, easing in.
   - The first chapter's pieces start at rest (no enter); the last chapter's pieces never exit.
 - Paper primitives in `components/paper/` (pure presentation, no motion): `TornStrip` (pins on/off), `KraftCard` (tape on/off, optional `tag`), `Polaroid` (`src?`, `caption?`, `onClick?`; renders a textured empty slot when `src` missing), `StickyNote` (`color`), `Ticket`, `MarkerNote` (Caveat text + optional SVG arrow with direction), `Sticker` (image with white cutout border).
 - `components/mat/ChapterLabel.tsx` — mono label on a small paper tab, e.g. `CH. 03 · SIDE PROJECTS`.
-- `components/mat/ChapterNav.tsx` — fixed corner tab showing current `CH. 0X`; click opens a mono index of chapters; selecting one scrolls to that chapter's start.
+- `components/mat/ChapterNav.tsx` — fixed corner tab showing current `CH. 0X`, first in tab order; click opens a mono index of chapters; selecting one scrolls to that chapter's hold point (progress 0.6), or its top under reduced motion.
 - `components/chapters/*.tsx` — one composition per chapter (below). Chapters only arrange primitives inside `Piece`s and read from `content/*`.
 
 New content files:
@@ -76,7 +76,7 @@ All chapters are one pinned spread; content is condensed to fit one viewport.
 ## Mobile & reduced motion
 
 - **Mobile (<768px)**: same pinned mechanic. Each `Piece` uses its `mobile` overrides (positions re-flowed into a loose vertical stack, scale ~0.8). Chapters with many pieces (02 photography, 03 projects) show fewer items on mobile (6 polaroids, projects at smaller scale). Mat grid sizes stay the same in px.
-- **`prefers-reduced-motion: reduce`**: no scroll-scrubbing. `Chapter` renders as a normal-height section (`min-h-screen`, not sticky) and every `Piece` renders at rest. The mat stays fixed.
+- **`prefers-reduced-motion: reduce`**: no scroll-scrubbing. `Chapter` renders as a normal-height section (`min-h-screen`, stage in normal flow) via CSS, and every `Piece` renders at rest once hydrated. The mat stays fixed.
 - **Accessibility**: real text (not images) for all copy; polaroids are `<button>`s with alt text; links are real `<a>`s; `ChapterNav` is keyboard-operable; Lightbox keeps its existing keyboard handling.
 
 ## Error handling / edge cases
