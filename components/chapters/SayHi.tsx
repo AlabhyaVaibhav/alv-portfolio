@@ -34,10 +34,16 @@ export function SayHi() {
                 {site.email}
                 <Squiggle />
               </a>
-              <a href={site.linkedinUrl} target="_blank" rel="noreferrer" className="group relative outline-none">
-                LinkedIn
-                <Squiggle />
-              </a>
+              <div className="flex gap-5">
+                <a href={site.linkedinUrl} target="_blank" rel="noreferrer" className="group relative outline-none">
+                  LinkedIn
+                  <Squiggle />
+                </a>
+                <a href={site.githubUrl} target="_blank" rel="noreferrer" className="group relative outline-none">
+                  GitHub
+                  <Squiggle />
+                </a>
+              </div>
             </div>
           </div>
         </div>
