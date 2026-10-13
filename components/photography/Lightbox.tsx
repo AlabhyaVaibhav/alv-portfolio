@@ -27,6 +27,25 @@ export function Lightbox({ slots, activeIndex, onClose, onNavigate }: LightboxPr
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [slot, onClose]);
 
+  // Scroll drives the whole page, so scrolling behind an open photo would swap chapters underneath it.
+  const isOpen = slot !== null;
+  useEffect(() => {
+    if (!isOpen) return;
+    const root = document.documentElement;
+    const previous = root.style.overflow;
+    root.style.overflow = "hidden";
+    // overflow alone isn't honoured for touch scrolling everywhere (older iOS Safari), so cancel
+    // the gestures too. The lightbox has nothing scrollable of its own.
+    const block = (event: Event) => event.preventDefault();
+    window.addEventListener("wheel", block, { passive: false });
+    window.addEventListener("touchmove", block, { passive: false });
+    return () => {
+      root.style.overflow = previous;
+      window.removeEventListener("wheel", block);
+      window.removeEventListener("touchmove", block);
+    };
+  }, [isOpen]);
+
   const isClient = useSyncExternalStore(subscribeNever, () => true, () => false);
   if (!isClient) return null;
 
