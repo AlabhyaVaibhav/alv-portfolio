@@ -19,6 +19,8 @@ type PieceProps = Placement & {
   enterAt?: number;
   mobile?: Placement;
   hideOnMobile?: boolean;
+  // Purely decorative: clicks pass through to whatever is underneath.
+  decor?: boolean;
   className?: string;
   children: ReactNode;
 };
@@ -33,6 +35,7 @@ export function Piece({
   enterAt = 0.2,
   mobile,
   hideOnMobile = false,
+  decor = false,
   className = "",
   children,
 }: PieceProps) {
@@ -55,7 +58,7 @@ export function Piece({
     <motion.div
       // Remount when the breakpoint flips so the transforms pick up the new placement.
       key={isMobile ? "mobile" : "desktop"}
-      className={`pointer-events-auto absolute ${className}`}
+      className={`${decor ? "pointer-events-none" : "pointer-events-auto"} absolute ${className}`}
       style={{
         left: `${place.x}%`,
         top: `${place.y}%`,

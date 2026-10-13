@@ -1,5 +1,6 @@
 import { Chapter } from "@/components/mat/Chapter";
 import { Piece } from "@/components/mat/Piece";
+import { Scatter, type ScatterItem } from "@/components/mat/Scatter";
 import { MarkerNote } from "@/components/paper/MarkerNote";
 import { Squiggle } from "@/components/paper/Squiggle";
 import { Sticker } from "@/components/paper/Sticker";
@@ -7,9 +8,17 @@ import { TornStrip } from "@/components/paper/TornStrip";
 import { chapters } from "@/content/chapters";
 import { site } from "@/content/site";
 
+// Things you'd send or pin up.
+const OBJECTS: ScatterItem[] = [
+  { name: "postcard", x: 43, y: 7, rotate: -6, from: "top", width: "md:w-[min(16vw,260px)]", mobile: null },
+  { name: "laptop-corner", x: -3, y: 72, rotate: 14, from: "left", width: "md:w-[min(19vw,310px)]", mobile: null },
+  { name: "paper-clips", x: 33, y: 36, rotate: 0, from: "bottom", width: "md:w-[min(6vw,100px)]", mobile: null },
+];
+
 export function SayHi() {
   return (
     <Chapter meta={chapters[5]}>
+      <Scatter items={OBJECTS} />
       <Piece x={6} y={12} from="left" enterAt={0.02} mobile={{ x: 5, y: 10 }}>
         <h2 className="font-display text-[22vw] italic leading-none text-cream md:text-[10vw]">Say hi.</h2>
       </Piece>

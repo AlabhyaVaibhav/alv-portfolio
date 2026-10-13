@@ -1,5 +1,6 @@
 import { Chapter } from "@/components/mat/Chapter";
 import { Piece } from "@/components/mat/Piece";
+import { Scatter, type ScatterItem } from "@/components/mat/Scatter";
 import { MarkerNote } from "@/components/paper/MarkerNote";
 import { Polaroid } from "@/components/paper/Polaroid";
 import { StickyNote } from "@/components/paper/StickyNote";
@@ -16,9 +17,18 @@ const PLACES = [
   { x: 70, y: 40, rotate: 5, from: "right", mobile: { x: 52, y: 45 } },
 ] as const;
 
+// The rest of the desk.
+const OBJECTS: ScatterItem[] = [
+  { name: "succulent", x: 31, y: 5, rotate: 0, from: "top", width: "md:w-[min(9vw,150px)]", mobile: null },
+  { name: "chai-cup", x: 88, y: 42, rotate: 0, from: "right", width: "w-[24vw] md:w-[min(8vw,130px)]", mobile: { x: 4, y: 80 } },
+  { name: "glasses-and-watch", x: 73, y: 78, rotate: -6, from: "bottom", width: "md:w-[min(14vw,230px)]", mobile: null },
+  { name: "tangled-earphones", x: 21, y: 79, rotate: 10, from: "left", width: "md:w-[min(9vw,150px)]", mobile: null },
+];
+
 export function Bailey() {
   return (
     <Chapter meta={chapters[4]}>
+      <Scatter items={OBJECTS} />
       {bailey.slice(0, PLACES.length).map((slot, i) => {
         const place = PLACES[i];
         return (
