@@ -11,3 +11,13 @@ export function groupPhotos<G, T extends Groupable<G>>(photos: T[], order: reado
     return { id, all, shown: all.slice(0, perGroup) };
   });
 }
+
+// Prints keep their photo's width:height, within these bounds, so a panorama doesn't swallow a row.
+export const PRINT_RATIO = { min: 0.56, max: 1.8 };
+
+export function printRatio(ratio: number): number {
+  return Math.min(Math.max(ratio, PRINT_RATIO.min), PRINT_RATIO.max);
+}
+
+// The most combined width (in print heights) a row can hold: two prints per row on desktop, three on mobile.
+export const MAX_ROW = { desktop: 2.7, mobile: 4.4 };

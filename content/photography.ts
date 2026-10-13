@@ -4,6 +4,8 @@ export type PhotoSlot = {
   id: string;
   alt: string;
   aspect: "portrait" | "square" | "landscape";
+  // Width over height, after EXIF rotation.
+  ratio: number;
   group: PhotoGroupId;
   // Shown on the mat ahead of the rest of its pile.
   pick?: boolean;
@@ -17,19 +19,18 @@ export const aspectClass: Record<PhotoSlot["aspect"], string> = {
   landscape: "aspect-[4/3]",
 };
 
-const L = "landscape" as const;
-const P = "portrait" as const;
-
-// One entry per file 01.jpg … 54.jpg, in order. To add a photo, drop NN.jpg in
-// public/photography/ and append its aspect here.
-const aspects: PhotoSlot["aspect"][] = [
-  L, P, L, P, P, P, P, L, L, P, // 01–10
-  P, P, L, P, L, L, P, L, L, L, // 11–20
-  L, L, L, L, L, L, L, L, L, L, // 21–30
-  L, L, L, L, L, L, L, L, L, L, // 31–40
-  P, L, P, P, L, L, P, P, P, P, // 41–50
-  P, P, P, L,                   // 51–54
+// Width:height of each file 01.jpg … 54.jpg, in order. To add a photo, drop NN.jpg in
+// public/photography/ and append its ratio here (and its pile below).
+const ratios = [
+  2.95, 0.56, 1.78, 0.56, 0.56, 0.56, 0.56, 1.34, 1.25, 0.8, // 01–10
+  0.8, 0.75, 1.34, 0.56, 1.25, 1.33, 0.8, 1.25, 1.25, 1.78, // 11–20
+  1.77, 1.25, 1.25, 1.79, 1.78, 1.77, 1.78, 1.78, 1.78, 1.78, // 21–30
+  1.25, 1.25, 1.25, 1.78, 1.78, 1.78, 1.78, 1.84, 1.25, 1.25, // 31–40
+  0.8, 1.26, 0.8, 0.56, 1.78, 1.25, 0.8, 0.51, 0.8, 0.56, // 41–50
+  0.56, 0.56, 0.8, 1.78, // 51–54
 ];
+
+const aspectOf = (ratio: number): PhotoSlot["aspect"] => (ratio < 0.9 ? "portrait" : ratio > 1.1 ? "landscape" : "square");
 
 // Piles on the mat, in order. TODO(copy): pile labels.
 export const PHOTO_GROUPS: { id: PhotoGroupId; label: string }[] = [
@@ -42,7 +43,7 @@ const B = "bailey" as const;
 const S = "places" as const;
 const H = "people" as const;
 
-// Which pile each file belongs to, in the same order as `aspects`.
+// Which pile each file belongs to, in the same order as `ratios`.
 const groups: PhotoGroupId[] = [
   S, B, H, H, H, H, B, H, S, H, // 01–10
   H, H, S, H, S, S, B, B, B, S, // 11–20
@@ -53,10 +54,10 @@ const groups: PhotoGroupId[] = [
 ];
 
 // The four of each pile that sit face-up on the mat.
-const picks = new Set(["01", "09", "30", "48", "41", "32", "43", "40", "02", "17", "07", "19"]);
+const picks = new Set(["13", "09", "30", "48", "41", "32", "43", "40", "02", "17", "07", "19"]);
 
 // TODO(copy): replace generic alt text with real descriptions.
-export const photography: PhotoSlot[] = aspects.map((aspect, i) => {
+export const photography: PhotoSlot[] = ratios.map((ratio, i) => {
   const id = String(i + 1).padStart(2, "0");
-  return { id, alt: `Photograph ${id}`, aspect, group: groups[i], pick: picks.has(id), src: `/photography/${id}.jpg` };
+  return { id, alt: `Photograph ${id}`, aspect: aspectOf(ratio), ratio, group: groups[i], pick: picks.has(id), src: `/photography/${id}.jpg` };
 });

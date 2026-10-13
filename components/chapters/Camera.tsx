@@ -9,13 +9,14 @@ import { Polaroid } from "@/components/paper/Polaroid";
 import { Tape } from "@/components/paper/Tape";
 import { chapters } from "@/content/chapters";
 import { PHOTO_GROUPS, photography } from "@/content/photography";
-import { groupPhotos } from "@/lib/photoGroups";
+import { groupPhotos, printRatio } from "@/lib/photoGroups";
 
 const PER_PILE = 4;
 
-// One pile per group: three columns on desktop, three rows on mobile (where each shows three prints).
+// One pile per group: three columns on desktop (two rows of two prints), three rows on mobile (three
+// prints each). Prints share a height and keep their photo's width.
 const PILES = [
-  { x: 4, y: 15, rotate: -1.5, from: "left", mobile: { x: 4, y: 11 } },
+  { x: 3, y: 15, rotate: -1.5, from: "left", mobile: { x: 4, y: 11 } },
   { x: 36, y: 18, rotate: 1, from: "bottom", mobile: { x: 4, y: 36 } },
   { x: 70, y: 15, rotate: -1, from: "right", mobile: { x: 4, y: 61 } },
 ] as const;
@@ -54,15 +55,24 @@ export function Camera() {
                   all {pile.all.length} →
                 </button>
               </div>
-              <div className="flex gap-2 md:grid md:grid-cols-2 md:gap-3">
-                {pile.shown.map((slot, i) => (
-                  <div key={slot.id} className={`${TILT[i % TILT.length]} ${i >= 3 ? "max-md:hidden" : ""}`}>
-                    <Polaroid
-                      src={slot.src}
-                      alt={slot.alt}
-                      size="xs"
-                      onClick={() => setOpen({ pile: p, index: i })}
-                    />
+              {/* Mobile: the row wrappers dissolve into one row. Desktop: two rows stacked. */}
+              <div className="flex items-end gap-2 md:flex-col md:items-start md:gap-3">
+                {[pile.shown.slice(0, 2), pile.shown.slice(2, 4)].map((row, r) => (
+                  <div key={r} className="flex items-end gap-3 max-md:contents">
+                    {row.map((slot, k) => {
+                      const i = r * 2 + k;
+                      return (
+                        <div key={slot.id} className={`${TILT[i % TILT.length]} ${i >= 3 ? "max-md:hidden" : ""}`}>
+                          <Polaroid
+                            src={slot.src}
+                            alt={slot.alt}
+                            size="xs"
+                            ratio={printRatio(slot.ratio)}
+                            onClick={() => setOpen({ pile: p, index: i })}
+                          />
+                        </div>
+                      );
+                    })}
                   </div>
                 ))}
               </div>

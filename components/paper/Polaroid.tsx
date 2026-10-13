@@ -1,9 +1,12 @@
+import type { CSSProperties } from "react";
 import Image from "next/image";
 
 type PolaroidProps = {
   src?: string;
   alt: string;
   caption?: string;
+  // Width over height. When set, the print keeps the photo's shape at a fixed height instead of a square crop.
+  ratio?: number;
   onClick?: () => void;
   size?: "xs" | "sm" | "md";
   className?: string;
@@ -15,16 +18,22 @@ const WIDTH = {
   md: "w-[40vw] md:w-[min(16vw,230px)]",
 };
 
+// Fixed print height; width follows --r (the ratio).
+const SHAPED = "h-[18vw] w-[calc(18vw*var(--r))] md:h-[min(10vw,150px)] md:w-[calc(min(10vw,150px)*var(--r))]";
+
 const PAD = {
   xs: "p-1.5 pb-6 md:p-2 md:pb-8",
   sm: "p-2 pb-10",
   md: "p-2 pb-10",
 };
 
-export function Polaroid({ src, alt, caption, onClick, size = "md", className = "" }: PolaroidProps) {
+export function Polaroid({ src, alt, caption, ratio, onClick, size = "md", className = "" }: PolaroidProps) {
   const frame = (
-    <div className={`relative bg-paper ${PAD[size]} ${WIDTH[size]}`}>
-      <div className="relative aspect-square w-full overflow-hidden bg-[#3b3a36]">
+    <div className={`relative bg-paper ${PAD[size]} ${ratio ? "" : WIDTH[size]}`}>
+      <div
+        className={`relative overflow-hidden bg-[#3b3a36] ${ratio ? SHAPED : "aspect-square w-full"}`}
+        style={ratio ? ({ "--r": ratio } as CSSProperties) : undefined}
+      >
         {src ? (
           <Image src={src} alt={alt} fill sizes="230px" className="object-cover" />
         ) : (
