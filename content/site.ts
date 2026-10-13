@@ -9,6 +9,7 @@ export type SiteContent = {
   todo: string[];
   email: string;
   linkedinUrl: string;
+  githubUrl: string;
   resumeHref: string;
   baileyNote: string;
   closingNote: string;
@@ -25,6 +26,7 @@ export const site: SiteContent = {
   todo: ["walk bailey", "sunday drive", "edit photos", "ship twine"],
   email: "alabhya.vaibhav1997@gmail.com",
   linkedinUrl: "https://www.linkedin.com/in/alabhya-vaibhav/",
+  githubUrl: "https://github.com/AlabhyaVaibhav",
   resumeHref: "/resume.pdf",
   // TODO(copy): written in Bailey's voice.
   baileyNote: "Human works too much. I supervise. — B",
