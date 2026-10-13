@@ -86,3 +86,51 @@ body {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* Ink write-on: a soft-edged mask sweeps left to right so text appears as if drawn out of the mat.
+   Set --ink-delay and --ink-dur inline. The padding gives italic overhangs and descenders room
+   inside the mask; the negative margin keeps the layout unchanged. */
+.ink-write {
+  padding: 0.14em 0.18em;
+  margin: -0.14em -0.18em;
+  mask-image: linear-gradient(90deg, #000 0 40%, transparent 60% 100%);
+  mask-size: 250% 100%;
+  mask-repeat: no-repeat;
+  mask-position: 100% 0;
+  animation: ink-write var(--ink-dur, 0.9s) cubic-bezier(0.45, 0.05, 0.55, 0.95) var(--ink-delay, 0s) both;
+}
+
+@keyframes ink-write {
+  from {
+    mask-position: 100% 0;
+    filter: blur(1.5px);
+  }
+  to {
+    mask-position: 0 0;
+    filter: blur(0);
+  }
+}
+
+/* A sketch-pen stroke drawing itself. The path needs pathLength="1". */
+.pen-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: pen-draw var(--ink-dur, 0.6s) cubic-bezier(0.6, 0, 0.3, 1) var(--ink-delay, 0s) forwards;
+}
+
+@keyframes pen-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ink-write {
+    animation: none;
+    mask-image: none;
+  }
+  .pen-draw {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
