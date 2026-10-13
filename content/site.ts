@@ -13,7 +13,7 @@ export type SiteContent = {
 export const site: SiteContent = {
   name: "Alabhya Vaibhav",
   greeting: "Hi, I'm Alabhya",
-  headline: ["An empathetic", "product designer", "who makes AI feel human"],
+  headline: ["An empathetic", "product manager", "who makes AI feel human"],
   email: "alabhya.vaibhav1997@gmail.com",
   linkedinUrl: "https://www.linkedin.com/in/alabhya-vaibhav/",
   resumeHref: "/resume.pdf",
