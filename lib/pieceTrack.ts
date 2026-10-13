@@ -6,6 +6,9 @@ export type PieceTrackInput = {
   rotate: number;
   enter: boolean;
   exit: boolean;
+  // Phones: ignore `from` and travel with the scroll instead, up from below and off through the top,
+  // keeping the resting tilt. Sideways sweeps fight a vertical thumb scroll.
+  vertical?: boolean;
 };
 
 export type Ease = "linear" | "in" | "out";
@@ -32,8 +35,8 @@ const ENTRY_OFFSET: Record<Edge, { x: number; y: number }> = {
 };
 
 // Keyframes for one piece across its chapter's scroll progress (0→1):
-// slide on from `from`, hold at rest, then get swept off to the left.
-export function pieceTrack({ from, enterAt, rotate, enter, exit }: PieceTrackInput): PieceTrack {
+// slide on from `from`, hold at rest, then get swept off to the left (or, vertical, up and away).
+export function pieceTrack({ from, enterAt, rotate, enter, exit, vertical = false }: PieceTrackInput): PieceTrack {
   const track: PieceTrack = { input: [], x: [], y: [], rotate: [], ease: [] };
   // `ease` applies to the segment that ends at this keyframe.
   const push = (t: number, x: number, y: number, r: number, ease: Ease = "linear") => {
@@ -48,8 +51,8 @@ export function pieceTrack({ from, enterAt, rotate, enter, exit }: PieceTrackInp
 
   if (enter) {
     const start = Math.min(Math.max(enterAt, 0), EXIT_START - ENTER_SPAN);
-    const off = ENTRY_OFFSET[from];
-    const spin = from === "left" || from === "top" ? -18 : 18;
+    const off = ENTRY_OFFSET[vertical ? "bottom" : from];
+    const spin = vertical ? 0 : from === "left" || from === "top" ? -18 : 18;
     push(0, off.x, off.y, rotate + spin);
     push(start, off.x, off.y, rotate + spin);
     push(start + ENTER_SPAN, 0, 0, rotate, "out");
@@ -59,7 +62,8 @@ export function pieceTrack({ from, enterAt, rotate, enter, exit }: PieceTrackInp
 
   if (exit) {
     push(EXIT_START, 0, 0, rotate);
-    push(1, -120, 8, rotate - 25, "in");
+    if (vertical) push(1, 0, -OFF_STAGE, rotate, "in");
+    else push(1, -120, 8, rotate - 25, "in");
   } else {
     push(1, 0, 0, rotate);
   }

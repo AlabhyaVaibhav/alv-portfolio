@@ -46,7 +46,7 @@ export function Piece({
       ? { x: mobile.x, y: mobile.y, rotate: mobile.rotate ?? rotate, scale: mobile.scale ?? scale }
       : { x, y, rotate, scale };
 
-  const track = pieceTrack({ from, enterAt, rotate: place.rotate, enter: !isFirst, exit: !isLast });
+  const track = pieceTrack({ from, enterAt, rotate: place.rotate, enter: !isFirst, exit: !isLast, vertical: isMobile });
   const ease = { ease: track.ease.map((e) => EASING[e]) };
   const tx = useTransform(progress, track.input, track.x.map((v) => `${v}vw`), ease);
   const ty = useTransform(progress, track.input, track.y.map((v) => `${v}vh`), ease);

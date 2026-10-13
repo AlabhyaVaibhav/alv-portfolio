@@ -72,3 +72,20 @@ test("ease has one entry per segment in every shape", () => {
     assert.equal(t.ease.length, t.input.length - 1, JSON.stringify(s));
   }
 });
+
+// Phones scroll vertically, so pieces follow the thumb: up from below, off through the top.
+test("vertical mode rises from below and leaves through the top, whatever the desktop edge", () => {
+  for (const from of ["left", "right", "top", "bottom"] as const) {
+    const t = pieceTrack({ from, enterAt: 0.2, rotate: 4, enter: true, exit: true, vertical: true });
+    assert.deepEqual(t.x, [0, 0, 0, 0, 0], `${from}: no sideways travel`);
+    assert.ok(t.y[0] > 100 && t.y[1] > 100, `${from}: starts below the stage`);
+    assert.equal(t.y[2], 0);
+    assert.equal(t.y[3], 0);
+    assert.ok(t.y[4] < -100, `${from}: exits above the stage`);
+  }
+});
+
+test("vertical mode keeps the resting tilt instead of spinning", () => {
+  const t = pieceTrack({ from: "left", enterAt: 0.1, rotate: -3, enter: true, exit: true, vertical: true });
+  assert.ok(t.rotate.every((r) => r === -3), `rotate ${t.rotate}`);
+});
