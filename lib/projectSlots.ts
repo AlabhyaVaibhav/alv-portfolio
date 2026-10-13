@@ -42,10 +42,38 @@ export function projectSlots(count: number): Slot[] {
   return n === 0 ? [] : LAYOUTS[n];
 }
 
-export function projectSlotMobile(index: number): { x: number; y: number; rotate: number } {
-  const right = index % 2 === 1;
-  const row = Math.floor(index / 2);
-  return { x: right ? 50 : 4, y: 14 + row * 28 + (right ? 4 : 0), rotate: right ? 3 : -3 };
+export type MobileSlot = { x: number; y: number; rotate: number; scale: number };
+
+// Mobile positions per project count: a two-column grid, shrunk for 5–6 so every row fits.
+const m = (x: number, y: number, scale = 1): MobileSlot => ({ x, y, rotate: x < 50 ? -3 : 3, scale });
+const MOBILE_LAYOUTS: Record<number, MobileSlot[]> = {
+  1: [m(20, 16)],
+  2: [m(4, 14), m(50, 18)],
+  3: [m(4, 14), m(50, 18), m(4, 46)],
+  4: [m(4, 14), m(50, 18), m(4, 46), m(50, 50)],
+  5: [m(4, 12, 0.8), m(52, 14, 0.8), m(4, 38, 0.8), m(52, 40, 0.8), m(4, 64, 0.8)],
+  6: [m(4, 12, 0.8), m(52, 14, 0.8), m(4, 38, 0.8), m(52, 40, 0.8), m(4, 64, 0.8), m(52, 66, 0.8)],
+};
+
+export function projectSlotsMobile(count: number): MobileSlot[] {
+  const n = Math.min(Math.max(Math.floor(count), 0), MAX_PROJECTS);
+  return n === 0 ? [] : MOBILE_LAYOUTS[n];
+}
+
+// Where the featured project's sticky note goes for each count: overlapping only the featured
+// card, never a neighbour.
+const NOTE_SLOTS: Record<number, { desktop: { x: number; y: number }; mobile: { x: number; y: number; scale: number } }> = {
+  1: { desktop: { x: 56, y: 40 }, mobile: { x: 52, y: 48, scale: 0.75 } },
+  2: { desktop: { x: 34, y: 40 }, mobile: { x: 30, y: 50, scale: 0.75 } },
+  3: { desktop: { x: 32, y: 38 }, mobile: { x: 52, y: 50, scale: 0.75 } },
+  4: { desktop: { x: 30, y: 38 }, mobile: { x: 28, y: 80, scale: 0.6 } },
+  5: { desktop: { x: 22, y: 44 }, mobile: { x: 52, y: 68, scale: 0.6 } },
+  6: { desktop: { x: 16, y: 42 }, mobile: { x: 30, y: 89, scale: 0.55 } },
+};
+
+export function noteSlot(count: number) {
+  const n = Math.min(Math.max(Math.floor(count), 1), MAX_PROJECTS);
+  return NOTE_SLOTS[n];
 }
 
 export function featuredFirst<T extends { featured?: boolean }>(items: T[]): T[] {

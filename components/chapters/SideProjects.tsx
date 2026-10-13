@@ -4,7 +4,7 @@ import { KraftCard } from "@/components/paper/KraftCard";
 import { StickyNote } from "@/components/paper/StickyNote";
 import { chapters } from "@/content/chapters";
 import { projects } from "@/content/projects";
-import { featuredFirst, MAX_PROJECTS, projectSlotMobile, projectSlots } from "@/lib/projectSlots";
+import { featuredFirst, MAX_PROJECTS, noteSlot, projectSlots, projectSlotsMobile } from "@/lib/projectSlots";
 
 const EDGES = ["left", "top", "right", "bottom"] as const;
 
@@ -14,12 +14,13 @@ export function SideProjects() {
     console.warn(`SideProjects shows ${MAX_PROJECTS} of ${ordered.length} projects.`);
   }
   const slots = projectSlots(ordered.length);
+  const mobileSlots = projectSlotsMobile(ordered.length);
+  const note = noteSlot(ordered.length);
 
   return (
     <Chapter meta={chapters[3]}>
       {slots.map((slot, i) => {
         const project = ordered[i];
-        const mobile = projectSlotMobile(i);
         return (
           <Piece
             key={project.name}
@@ -28,7 +29,7 @@ export function SideProjects() {
             rotate={slot.rotate}
             from={EDGES[i % EDGES.length]}
             enterAt={0.03 + i * 0.03}
-            mobile={mobile}
+            mobile={mobileSlots[i]}
           >
             <KraftCard
               title={project.name}
@@ -41,26 +42,18 @@ export function SideProjects() {
           </Piece>
         );
       })}
-      {slots.map((slot, i) => {
-        const note = ordered[i].note;
-        if (!note) return null;
-        const mobile = projectSlotMobile(i);
-        // Tucked under the card's bottom-right corner, clear of the tag and the neighbouring cards.
-        const inset = slot.size === "lg" ? 22 : 14;
-        return (
-          <Piece
-            key={`${ordered[i].name}-note`}
-            x={Math.min(slot.x + inset, 86)}
-            y={Math.min(slot.y + 20, 72)}
-            rotate={7}
-            from="top"
-            enterAt={0.16}
-            mobile={{ x: Math.min(mobile.x + 46, 56), y: Math.min(mobile.y + 30, 80), rotate: 7, scale: 0.75 }}
-          >
-            <StickyNote>{note}</StickyNote>
-          </Piece>
-        );
-      })}
+      {ordered[0]?.note && slots.length > 0 && (
+        <Piece
+          x={note.desktop.x}
+          y={note.desktop.y}
+          rotate={7}
+          from="top"
+          enterAt={0.16}
+          mobile={{ ...note.mobile, rotate: 7 }}
+        >
+          <StickyNote>{ordered[0].note}</StickyNote>
+        </Piece>
+      )}
     </Chapter>
   );
 }
