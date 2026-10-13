@@ -1,11 +1,13 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
-import { useReducedMotion, useScroll } from "framer-motion";
+import { useRef, useState, type ReactNode } from "react";
+import { useMotionValueEvent, useScroll } from "framer-motion";
 import { chapters, type ChapterMeta } from "@/content/chapters";
+import { SECTION_CLASS, STAGE_CLASS, stageInteractive } from "@/lib/chapterLayout";
 import { ChapterContext, type ChapterContextValue } from "./chapterContext";
 import { ChapterLabel } from "./ChapterLabel";
 import { Piece } from "./Piece";
+import { usePrefersReducedMotion } from "./usePrefersReducedMotion";
 
 type ChapterProps = {
   meta: ChapterMeta;
@@ -18,24 +20,19 @@ type ChapterProps = {
 export function Chapter({ meta, children }: ChapterProps) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end end"] });
-  const still = useReducedMotion() ?? false;
-  const value: ChapterContextValue = {
-    progress: scrollYProgress,
-    isFirst: meta.number === chapters[0].number,
-    isLast: meta.number === chapters[chapters.length - 1].number,
-    still,
-  };
+  const still = usePrefersReducedMotion();
+  const isFirst = meta.number === chapters[0].number;
+  const isLast = meta.number === chapters[chapters.length - 1].number;
+
+  const [onMat, setOnMat] = useState(() => stageInteractive(scrollYProgress.get(), isFirst, isLast));
+  useMotionValueEvent(scrollYProgress, "change", (p) => setOnMat(stageInteractive(p, isFirst, isLast)));
+
+  const value: ChapterContextValue = { progress: scrollYProgress, isFirst, isLast, still };
 
   return (
     <ChapterContext.Provider value={value}>
-      <section
-        ref={ref}
-        id={meta.id}
-        data-chapter={meta.number}
-        aria-label={meta.title}
-        className={still ? "relative min-h-[110vh] md:min-h-screen" : "relative h-[250vh]"}
-      >
-        <div className={still ? "relative min-h-[110vh] md:min-h-screen" : "pointer-events-none fixed inset-0"}>
+      <section ref={ref} id={meta.id} data-chapter={meta.number} aria-label={meta.title} className={SECTION_CLASS}>
+        <div className={STAGE_CLASS} inert={!still && !onMat}>
           <Piece x={3} y={4} rotate={-2} from="left" enterAt={0} mobile={{ x: 4, y: 3 }}>
             <ChapterLabel meta={meta} />
           </Piece>

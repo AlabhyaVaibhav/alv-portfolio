@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState, useSyncExternalStore } from "react";
-import { useReducedMotion } from "framer-motion";
 import { chapters } from "@/content/chapters";
 import { activeChapterIndex, holdScrollY } from "@/lib/chapterScroll";
+import { usePrefersReducedMotion } from "./usePrefersReducedMotion";
 
 function subscribe(onChange: () => void) {
   window.addEventListener("scroll", onChange, { passive: true });
@@ -27,7 +27,7 @@ const pad = (n: number) => String(n).padStart(2, "0");
 export function ChapterNav() {
   const active = useSyncExternalStore(subscribe, readActive, () => 0);
   const [open, setOpen] = useState(false);
-  const reduce = useReducedMotion() ?? false;
+  const reduce = usePrefersReducedMotion();
 
   useEffect(() => {
     if (!open) return;

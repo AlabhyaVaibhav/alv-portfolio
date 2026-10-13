@@ -9,6 +9,8 @@ import { ChapterNav } from "@/components/mat/ChapterNav";
 export default function Home() {
   return (
     <>
+      {/* First in tab order; it's fixed, so placement in the DOM doesn't move it. */}
+      <ChapterNav />
       <main className="relative z-[1]">
         <Cover />
         <DayJob />
@@ -17,7 +19,6 @@ export default function Home() {
         <Bailey />
         <SayHi />
       </main>
-      <ChapterNav />
     </>
   );
 }
