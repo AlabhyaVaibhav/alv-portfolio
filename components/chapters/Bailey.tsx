@@ -4,6 +4,7 @@ import { MarkerNote } from "@/components/paper/MarkerNote";
 import { Polaroid } from "@/components/paper/Polaroid";
 import { StickyNote } from "@/components/paper/StickyNote";
 import { Ticket } from "@/components/paper/Ticket";
+import { TodoSticky } from "@/components/paper/TodoSticky";
 import { bailey } from "@/content/bailey";
 import { chapters } from "@/content/chapters";
 import { site } from "@/content/site";
@@ -43,6 +44,9 @@ export function Bailey() {
       </Piece>
       <Piece x={8} y={66} rotate={-4} from="left" enterAt={0.15} mobile={{ x: 30, y: 74, rotate: -4, scale: 0.85 }}>
         <StickyNote color="pink">{site.baileyNote}</StickyNote>
+      </Piece>
+      <Piece x={48} y={52} rotate={3} from="bottom" enterAt={0.16} hideOnMobile className="max-lg:hidden">
+        <TodoSticky title={site.todoTitle} items={site.todo} />
       </Piece>
       <Piece x={48} y={80} rotate={-2} from="bottom" enterAt={0.18} hideOnMobile>
         <MarkerNote arrow="left">the other half of the job</MarkerNote>

@@ -1,6 +1,7 @@
 import { Chapter } from "@/components/mat/Chapter";
 import { Piece } from "@/components/mat/Piece";
 import { MarkerNote } from "@/components/paper/MarkerNote";
+import { Squiggle } from "@/components/paper/Squiggle";
 import { Sticker } from "@/components/paper/Sticker";
 import { TornStrip } from "@/components/paper/TornStrip";
 import { chapters } from "@/content/chapters";
@@ -17,12 +18,14 @@ export function SayHi() {
           <div className="w-[88vw] bg-paper p-6 text-ink md:w-[380px]">
             <p className="font-display text-3xl italic">{site.name}</p>
             <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-ink/60">Product · Photography · Side projects</p>
-            <div className="mt-5 space-y-1.5 font-mono text-[12px]">
-              <a href={`mailto:${site.email}`} className="block underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
+            <div className="mt-5 flex flex-col items-start gap-3 font-mono text-[12px]">
+              <a href={`mailto:${site.email}`} className="group relative outline-none">
                 {site.email}
+                <Squiggle />
               </a>
-              <a href={site.linkedinUrl} target="_blank" rel="noreferrer" className="block underline decoration-ink/30 underline-offset-4 hover:decoration-ink">
+              <a href={site.linkedinUrl} target="_blank" rel="noreferrer" className="group relative outline-none">
                 LinkedIn
+                <Squiggle />
               </a>
             </div>
           </div>

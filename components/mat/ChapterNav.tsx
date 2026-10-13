@@ -3,6 +3,7 @@
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { chapters } from "@/content/chapters";
 import { activeChapterIndex, holdScrollY } from "@/lib/chapterScroll";
+import { Squiggle } from "@/components/paper/Squiggle";
 import { usePrefersReducedMotion } from "./usePrefersReducedMotion";
 
 function subscribe(onChange: () => void) {
@@ -66,9 +67,12 @@ export function ChapterNav() {
                 type="button"
                 onClick={() => jump(i)}
                 aria-current={i === active ? "step" : undefined}
-                className={`block w-full px-4 py-1.5 text-left hover:bg-ink/5 ${i === active ? "font-bold" : ""}`}
+                className="group block w-full px-4 py-1.5 text-left outline-none"
               >
-                {pad(c.number)} · {c.title}
+                <span className="relative">
+                  {pad(c.number)} · {c.title}
+                  <Squiggle drawn={i === active} className="-bottom-1.5" />
+                </span>
               </button>
             </li>
           ))}

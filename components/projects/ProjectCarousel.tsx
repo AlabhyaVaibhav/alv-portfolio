@@ -43,7 +43,7 @@ export function ProjectCarousel({ projects }: { projects: Project[] }) {
     "flex h-9 w-9 items-center justify-center rounded-full bg-paper font-mono text-base text-ink shadow-md transition-opacity hover:bg-white disabled:opacity-60 disabled:text-ink/30 md:h-10 md:w-10";
 
   return (
-    <div className="paper-grid drop-object relative w-[92vw] rounded-[22px] pb-6 pt-4 md:rounded-[28px] md:pb-8 md:pt-6">
+    <div className="paper-grid drop-object relative w-[92vw] rounded-[22px] pb-6 pt-2 md:rounded-[28px] md:pb-8 md:pt-3">
       <Tape className="-top-2 left-10 -rotate-6" />
       <Tape className="-top-2 right-10 rotate-6" />
       <div
@@ -52,7 +52,7 @@ export function ProjectCarousel({ projects }: { projects: Project[] }) {
         role="region"
         aria-label="Side projects"
         tabIndex={0}
-        className="no-scrollbar flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto overscroll-x-contain px-4 pb-2 pt-1 outline-none focus-visible:ring-2 focus-visible:ring-ink/40 md:scroll-px-8 md:gap-6 md:px-8"
+        className="no-scrollbar flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto overscroll-x-contain px-4 pb-2 pt-6 outline-none focus-visible:ring-2 focus-visible:ring-ink/40 md:scroll-px-8 md:gap-6 md:px-8"
       >
         {projects.map((project) => (
           <ProjectCard key={project.name} project={project} />
