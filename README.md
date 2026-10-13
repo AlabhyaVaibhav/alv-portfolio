@@ -71,11 +71,11 @@ To change copy, edit `content/`. Anything still marked `TODO(copy)` is placehold
 
 ## Deploy
 
+Hosted on [Vercel](https://vercel.com):
+
 ```sh
 vercel deploy --prod
 ```
-
-The repo also has a GitHub Pages workflow (`.github/workflows/deploy.yml`) that deploys whenever `main` is pushed.
 
 ## Credits
 
