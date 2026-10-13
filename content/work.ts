@@ -4,9 +4,19 @@ export type Position = {
   bullets: string[];
 };
 
+export type Highlight = {
+  title: string;
+  metric: string;
+  line: string;
+};
+
 export type Company = {
   name: string;
   location: string;
+  years: string;
+  isInternship?: boolean;
+  // Condensed cards for the Day job chapter.
+  highlights?: Highlight[];
   positions: Position[];
 };
 
@@ -14,6 +24,13 @@ export const workHistory: Company[] = [
   {
     name: "CommerceIQ",
     location: "Bengaluru",
+    years: "2021–now",
+    highlights: [
+      { title: "Ally · AI Insights", metric: "New ARR + GDR", line: "Omni-channel AI recommendations surfaced inside the platform." },
+      { title: "Reporting platform", metric: "−79% manual work · ~$500K/yr", line: "Automated cross-product decks so CSMs could focus on customers." },
+      { title: "RBAC & user mgmt", metric: "+10% adoption QoQ", line: "Modular roles that pulled the product suite onto one platform." },
+      { title: "Product discovery", metric: "4 features shipped", line: "Customer discovery plus adoption tracking to steer the roadmap." },
+    ],
     positions: [
       {
         title: "Product Manager, Platform",
@@ -46,6 +63,7 @@ export const workHistory: Company[] = [
   {
     name: "Soroco",
     location: "Bengaluru",
+    years: "2020–21",
     positions: [
       {
         title: "Business Analyst, Store Insights",
@@ -60,6 +78,7 @@ export const workHistory: Company[] = [
   {
     name: "Quikr",
     location: "Bengaluru",
+    years: "2018–20",
     positions: [
       {
         title: "Full Stack Developer, Quikr Jobs",
@@ -74,6 +93,8 @@ export const workHistory: Company[] = [
   {
     name: "McKinsey & Company",
     location: "Gurgaon",
+    years: "2018",
+    isInternship: true,
     positions: [
       {
         title: "IoT Research Intern, Labs",

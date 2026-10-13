@@ -2,8 +2,7 @@ export type PhotoSlot = {
   id: string;
   alt: string;
   aspect: "portrait" | "square" | "landscape";
-  // Populate with "/photography/<filename>.jpg" (place the file in public/photography/)
-  // once a real photo is ready — no component code changes needed.
+  // "/photography/<id>.jpg" (file lives in public/photography/).
   src?: string;
 };
 
@@ -13,14 +12,22 @@ export const aspectClass: Record<PhotoSlot["aspect"], string> = {
   landscape: "aspect-[4/3]",
 };
 
-export const photography: PhotoSlot[] = [
-  { id: "01", alt: "Photograph 01", aspect: "portrait" },
-  { id: "02", alt: "Photograph 02", aspect: "square" },
-  { id: "03", alt: "Photograph 03", aspect: "landscape" },
-  { id: "04", alt: "Photograph 04", aspect: "portrait" },
-  { id: "05", alt: "Photograph 05", aspect: "square" },
-  { id: "06", alt: "Photograph 06", aspect: "landscape" },
-  { id: "07", alt: "Photograph 07", aspect: "portrait" },
-  { id: "08", alt: "Photograph 08", aspect: "square" },
-  { id: "09", alt: "Photograph 09", aspect: "landscape" },
+const L = "landscape" as const;
+const P = "portrait" as const;
+
+// One entry per file 01.jpg … 54.jpg, in order. To add a photo, drop NN.jpg in
+// public/photography/ and append its aspect here.
+const aspects: PhotoSlot["aspect"][] = [
+  L, P, L, P, P, P, P, L, L, P, // 01–10
+  P, P, L, P, L, L, P, L, L, L, // 11–20
+  L, L, L, L, L, L, L, L, L, L, // 21–30
+  L, L, L, L, L, L, L, L, L, L, // 31–40
+  P, L, P, P, L, L, P, P, P, P, // 41–50
+  P, P, P, L,                   // 51–54
 ];
+
+// TODO(copy): replace generic alt text with real descriptions.
+export const photography: PhotoSlot[] = aspects.map((aspect, i) => {
+  const id = String(i + 1).padStart(2, "0");
+  return { id, alt: `Photograph ${id}`, aspect, src: `/photography/${id}.jpg` };
+});
