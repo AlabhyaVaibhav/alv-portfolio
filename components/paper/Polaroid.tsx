@@ -5,18 +5,25 @@ type PolaroidProps = {
   alt: string;
   caption?: string;
   onClick?: () => void;
-  size?: "sm" | "md";
+  size?: "xs" | "sm" | "md";
   className?: string;
 };
 
 const WIDTH = {
+  xs: "w-[25vw] md:w-[min(12vw,190px)]",
   sm: "w-[38vw] md:w-[min(13vw,190px)]",
   md: "w-[40vw] md:w-[min(16vw,230px)]",
 };
 
+const PAD = {
+  xs: "p-1.5 pb-6 md:p-2 md:pb-8",
+  sm: "p-2 pb-10",
+  md: "p-2 pb-10",
+};
+
 export function Polaroid({ src, alt, caption, onClick, size = "md", className = "" }: PolaroidProps) {
   const frame = (
-    <div className={`relative bg-paper p-2 pb-10 ${WIDTH[size]}`}>
+    <div className={`relative bg-paper ${PAD[size]} ${WIDTH[size]}`}>
       <div className="relative aspect-square w-full overflow-hidden bg-[#3b3a36]">
         {src ? (
           <Image src={src} alt={alt} fill sizes="230px" className="object-cover" />

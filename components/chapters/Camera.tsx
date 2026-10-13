@@ -6,57 +6,79 @@ import { Piece } from "@/components/mat/Piece";
 import { Lightbox } from "@/components/photography/Lightbox";
 import { MarkerNote } from "@/components/paper/MarkerNote";
 import { Polaroid } from "@/components/paper/Polaroid";
+import { Tape } from "@/components/paper/Tape";
 import { chapters } from "@/content/chapters";
-import { photography } from "@/content/photography";
-import { withSrc } from "@/lib/collections";
+import { PHOTO_GROUPS, photography } from "@/content/photography";
+import { groupPhotos } from "@/lib/photoGroups";
 
-const PLACES = [
-  { x: 6, y: 14, rotate: -6, from: "left", mobile: { x: 6, y: 12 } },
-  { x: 24, y: 32, rotate: 4, from: "bottom", mobile: { x: 52, y: 14 } },
-  { x: 42, y: 12, rotate: -3, from: "top", mobile: { x: 6, y: 38 } },
-  { x: 60, y: 28, rotate: 5, from: "right", mobile: { x: 52, y: 40 } },
-  { x: 79, y: 12, rotate: -4, from: "right", mobile: { x: 6, y: 64 } },
-  { x: 10, y: 58, rotate: 3, from: "left", mobile: { x: 52, y: 66 } },
-  { x: 46, y: 58, rotate: -5, from: "bottom", mobile: null },
-  { x: 74, y: 56, rotate: 4, from: "right", mobile: null },
+const PER_PILE = 4;
+
+// One pile per group: three columns on desktop, three rows on mobile (where each shows three prints).
+const PILES = [
+  { x: 4, y: 15, rotate: -1.5, from: "left", mobile: { x: 4, y: 11 } },
+  { x: 36, y: 18, rotate: 1, from: "bottom", mobile: { x: 4, y: 36 } },
+  { x: 70, y: 15, rotate: -1, from: "right", mobile: { x: 4, y: 61 } },
 ] as const;
 
+// Small per-print tilts so a pile reads as tossed-down prints, not a grid.
+const TILT = ["-rotate-3", "rotate-2", "rotate-1", "-rotate-2"];
+
 export function Camera() {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const shown = withSrc(photography, PLACES.length);
+  const piles = groupPhotos(photography, PHOTO_GROUPS.map((g) => g.id), PER_PILE);
+  const [open, setOpen] = useState<{ pile: number; index: number } | null>(null);
 
   return (
     <Chapter meta={chapters[2]}>
-      {shown.map((slot, i) => {
-        const place = PLACES[i];
+      {piles.map((pile, p) => {
+        const place = PILES[p];
+        const label = PHOTO_GROUPS[p].label;
         return (
           <Piece
-            key={slot.id}
+            key={pile.id}
             x={place.x}
             y={place.y}
             rotate={place.rotate}
             from={place.from}
-            enterAt={0.02 + i * 0.025}
-            mobile={place.mobile ? { ...place.mobile, rotate: place.rotate } : undefined}
-            hideOnMobile={place.mobile === null}
+            enterAt={0.03 + p * 0.04}
+            mobile={{ ...place.mobile, rotate: place.rotate }}
           >
-            <Polaroid
-              src={slot.src}
-              alt={slot.alt}
-              size="sm"
-              onClick={() => setActiveIndex(photography.indexOf(slot))}
-            />
+            <div className="flex flex-col items-start gap-2 md:gap-3">
+              <div className="relative ml-2 flex items-baseline gap-3 bg-paper px-3 py-1 shadow-sm">
+                <Tape className="-top-2 left-1/2 -translate-x-1/2 -rotate-3" />
+                <h3 className="font-hand text-2xl leading-none text-ink md:text-[28px]">{label}</h3>
+                <button
+                  type="button"
+                  onClick={() => setOpen({ pile: p, index: 0 })}
+                  className="font-mono text-[10px] uppercase tracking-[0.12em] text-ink/60 underline-offset-2 hover:text-ink hover:underline"
+                >
+                  all {pile.all.length} →
+                </button>
+              </div>
+              <div className="flex gap-2 md:grid md:grid-cols-2 md:gap-3">
+                {pile.shown.map((slot, i) => (
+                  <div key={slot.id} className={`${TILT[i % TILT.length]} ${i >= 3 ? "max-md:hidden" : ""}`}>
+                    <Polaroid
+                      src={slot.src}
+                      alt={slot.alt}
+                      size="xs"
+                      onClick={() => setOpen({ pile: p, index: i })}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
           </Piece>
         );
       })}
-      <Piece x={28} y={86} rotate={-2} from="bottom" enterAt={0.2} hideOnMobile>
-        <MarkerNote arrow="up">click any of them to look closer ({photography.length} in the box)</MarkerNote>
+      <Piece x={30} y={88} rotate={-2} from="bottom" enterAt={0.2} hideOnMobile>
+        {/* TODO(copy) */}
+        <MarkerNote arrow="up">{photography.length} prints, three piles. click one to flip through</MarkerNote>
       </Piece>
       <Lightbox
-        slots={photography}
-        activeIndex={activeIndex}
-        onClose={() => setActiveIndex(null)}
-        onNavigate={setActiveIndex}
+        slots={open ? piles[open.pile].all : []}
+        activeIndex={open ? open.index : null}
+        onClose={() => setOpen(null)}
+        onNavigate={(index) => setOpen((o) => (o ? { ...o, index } : o))}
       />
     </Chapter>
   );
