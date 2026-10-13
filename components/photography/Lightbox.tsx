@@ -55,7 +55,7 @@ export function Lightbox({ slots, activeIndex, onClose, onNavigate }: LightboxPr
                 alt={slot.alt}
                 width={1200}
                 height={1500}
-                className={`w-full rounded-sm object-contain ${aspectClass[slot.aspect]}`}
+                className="mx-auto h-auto max-h-[78vh] w-auto max-w-full rounded-sm object-contain"
               />
             ) : (
               <div

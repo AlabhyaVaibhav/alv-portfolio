@@ -27,7 +27,7 @@ export function SideProjects() {
             y={slot.y}
             rotate={slot.rotate}
             from={EDGES[i % EDGES.length]}
-            enterAt={0.13 + i * 0.03}
+            enterAt={0.03 + i * 0.03}
             mobile={mobile}
           >
             <KraftCard
@@ -45,16 +45,17 @@ export function SideProjects() {
         const note = ordered[i].note;
         if (!note) return null;
         const mobile = projectSlotMobile(i);
-        const width = slot.size === "lg" ? 26 : 16;
+        // Tucked under the card's bottom-right corner, clear of the tag and the neighbouring cards.
+        const inset = slot.size === "lg" ? 22 : 14;
         return (
           <Piece
             key={`${ordered[i].name}-note`}
-            x={Math.min(slot.x + width, 84)}
-            y={Math.max(slot.y - 8, 8)}
+            x={Math.min(slot.x + inset, 86)}
+            y={Math.min(slot.y + 20, 72)}
             rotate={7}
             from="top"
-            enterAt={0.26}
-            mobile={{ x: mobile.x + 22, y: Math.max(mobile.y - 6, 6), rotate: 7, scale: 0.6 }}
+            enterAt={0.16}
+            mobile={{ x: Math.min(mobile.x + 46, 56), y: Math.min(mobile.y + 30, 80), rotate: 7, scale: 0.75 }}
           >
             <StickyNote>{note}</StickyNote>
           </Piece>

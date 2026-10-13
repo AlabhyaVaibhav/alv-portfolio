@@ -34,7 +34,7 @@ The whole site is a **green self-healing cutting mat** that stays fixed in the v
 - **Kraft paper**: `#c9a477` with two layered speckle radial-gradients, ink `#2b1f14`, translucent washi tape strips.
 - **Sticky notes**: yellow `#f6d77a`, pink `#f2b8a2`. **Polaroids**: `#fbfaf6` frame, thicker bottom margin.
 - **Shadows**: every object casts `drop-shadow(0 10px 12px rgba(0,0,0,.35))` so it reads as lying on the mat.
-- **Sticker cutout**: the dot portrait (`~/Documents/assets/dot-portrait/alabhya-bailey-dots-transparent-2400.png`, copied into `public/`) with a white border via stacked `drop-shadow`s. `source-photo.png` is never copied or published.
+- **Sticker**: the charcoal dot portrait (`~/Documents/assets/dot-portrait/alabhya-bailey-dots-charcoal-512.png`, copied to `public/sticker/alabhya-bailey.png`) as a rounded-rectangle sticker with a 7px white border. (The transparent version was dropped: a dot-matrix silhouette cannot carry a cutout outline, and the art is designed for a dark background.) `source-photo.png` is never copied or published.
 
 ## Architecture
 

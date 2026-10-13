@@ -27,24 +27,24 @@ export function Bailey() {
             y={place.y}
             rotate={place.rotate}
             from={place.from}
-            enterAt={0.12 + i * 0.03}
+            enterAt={0.02 + i * 0.03}
             mobile={{ ...place.mobile, rotate: place.rotate }}
           >
             <Polaroid src={slot.src} alt={slot.alt} caption={slot.caption} />
           </Piece>
         );
       })}
-      <Piece x={71} y={13} rotate={-4} from="right" enterAt={0.22} hideOnMobile>
+      <Piece x={71} y={13} rotate={-4} from="right" enterAt={0.12} hideOnMobile>
         <Ticket label="drive">
           BLR → somewhere
           <br />
           2 humans · 1 cat
         </Ticket>
       </Piece>
-      <Piece x={8} y={66} rotate={-4} from="left" enterAt={0.25} mobile={{ x: 30, y: 74, rotate: -4, scale: 0.85 }}>
+      <Piece x={8} y={66} rotate={-4} from="left" enterAt={0.15} mobile={{ x: 30, y: 74, rotate: -4, scale: 0.85 }}>
         <StickyNote color="pink">{site.baileyNote}</StickyNote>
       </Piece>
-      <Piece x={48} y={80} rotate={-2} from="bottom" enterAt={0.28} hideOnMobile>
+      <Piece x={48} y={80} rotate={-2} from="bottom" enterAt={0.18} hideOnMobile>
         <MarkerNote arrow="left">the other half of the job</MarkerNote>
       </Piece>
     </Chapter>

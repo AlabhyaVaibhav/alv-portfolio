@@ -36,7 +36,7 @@ export function Camera() {
             y={place.y}
             rotate={place.rotate}
             from={place.from}
-            enterAt={0.12 + i * 0.025}
+            enterAt={0.02 + i * 0.025}
             mobile={place.mobile ? { ...place.mobile, rotate: place.rotate } : undefined}
             hideOnMobile={place.mobile === null}
           >
@@ -49,7 +49,7 @@ export function Camera() {
           </Piece>
         );
       })}
-      <Piece x={28} y={86} rotate={-2} from="bottom" enterAt={0.3} hideOnMobile>
+      <Piece x={28} y={86} rotate={-2} from="bottom" enterAt={0.2} hideOnMobile>
         <MarkerNote arrow="up">click any of them to look closer ({photography.length} in the box)</MarkerNote>
       </Piece>
       <Lightbox

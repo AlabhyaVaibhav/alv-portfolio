@@ -21,7 +21,7 @@ export function DayJob() {
 
   return (
     <Chapter meta={chapters[1]}>
-      <Piece x={6} y={11} from="left" enterAt={0.12} hideOnMobile>
+      <Piece x={6} y={11} from="left" enterAt={0.02} hideOnMobile>
         <h2 className="font-display text-6xl italic text-cream md:text-7xl">Building at {current.name}</h2>
       </Piece>
       {current.highlights?.map((h, i) => {
@@ -33,7 +33,7 @@ export function DayJob() {
             y={place.y}
             rotate={place.rotate}
             from={place.from}
-            enterAt={0.14 + i * 0.03}
+            enterAt={0.04 + i * 0.03}
             mobile={{ ...place.mobile, rotate: place.rotate }}
           >
             <KraftCard title={h.title} metric={h.metric}>
@@ -42,7 +42,7 @@ export function DayJob() {
           </Piece>
         );
       })}
-      <Piece x={46} y={66} rotate={-1} from="right" enterAt={0.24} mobile={{ x: 4, y: 68, rotate: -1 }}>
+      <Piece x={46} y={66} rotate={-1} from="right" enterAt={0.14} mobile={{ x: 4, y: 68, rotate: -1 }}>
         <TornStrip>
           <p>{timeline.map((c) => `${c.name} ${c.years}`).join(" → ")}</p>
           {internship && (
@@ -52,7 +52,7 @@ export function DayJob() {
           )}
         </TornStrip>
       </Piece>
-      <Piece x={79} y={28} rotate={6} from="right" enterAt={0.2} mobile={{ x: 56, y: 84, rotate: 4 }}>
+      <Piece x={79} y={28} rotate={6} from="right" enterAt={0.1} mobile={{ x: 48, y: 84, rotate: 4 }}>
         <Ticket label="resume" href={site.resumeHref} download>
           resume.pdf
           <br />

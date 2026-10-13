@@ -53,3 +53,22 @@ test("late or negative enterAt is clamped so the piece rests before exit", () =>
     assert.ok(restIndex > 0 && t.input[restIndex] <= EXIT_START + 1e-9, `no rest before exit for ${enterAt}`);
   }
 });
+
+test("entry segments ease out, exit segments ease in, holds are linear", () => {
+  const t = pieceTrack({ from: "left", enterAt: 0.2, rotate: 0, enter: true, exit: true });
+  // segments: wait offstage, slide in, hold, sweep off
+  assert.deepEqual(t.ease, ["linear", "out", "linear", "in"]);
+});
+
+test("ease has one entry per segment in every shape", () => {
+  const shapes = [
+    { enter: true, exit: true, enterAt: 0 },
+    { enter: false, exit: true, enterAt: 0.2 },
+    { enter: true, exit: false, enterAt: 0.95 },
+    { enter: false, exit: false, enterAt: 0.2 },
+  ];
+  for (const s of shapes) {
+    const t = pieceTrack({ from: "right", rotate: 0, ...s });
+    assert.equal(t.ease.length, t.input.length - 1, JSON.stringify(s));
+  }
+});

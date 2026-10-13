@@ -24,7 +24,7 @@ export function Cover() {
       <Piece x={62} y={14} rotate={4} mobile={{ x: 40, y: 58, rotate: 5 }}>
         <Sticker src="/sticker/alabhya-bailey.png" alt="Dot-matrix portrait of Alabhya holding Bailey the cat" width={512} height={495} />
       </Piece>
-      <Piece x={63} y={70} rotate={-4} mobile={{ x: 4, y: 66, rotate: -3 }}>
+      <Piece x={63} y={70} rotate={-4} mobile={{ x: 4, y: 84, rotate: -3 }}>
         <MarkerNote arrow="up">that&apos;s me &amp; Bailey</MarkerNote>
       </Piece>
       <Piece x={6} y={86} hideOnMobile>

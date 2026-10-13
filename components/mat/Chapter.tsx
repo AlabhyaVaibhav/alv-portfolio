@@ -36,7 +36,7 @@ export function Chapter({ meta, children }: ChapterProps) {
         className={still ? "relative min-h-[110vh] md:min-h-screen" : "relative h-[250vh]"}
       >
         <div className={still ? "relative min-h-[110vh] md:min-h-screen" : "pointer-events-none fixed inset-0"}>
-          <Piece x={3} y={4} rotate={-2} from="left" enterAt={0.1} mobile={{ x: 4, y: 3 }}>
+          <Piece x={3} y={4} rotate={-2} from="left" enterAt={0} mobile={{ x: 4, y: 3 }}>
             <ChapterLabel meta={meta} />
           </Piece>
           {children}

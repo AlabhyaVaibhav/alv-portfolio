@@ -1,10 +1,16 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { motion, useTransform } from "framer-motion";
-import { pieceTrack, type Edge } from "@/lib/pieceTrack";
+import { cubicBezier, motion, useTransform } from "framer-motion";
+import { pieceTrack, type Ease, type Edge } from "@/lib/pieceTrack";
 import { useChapter } from "./chapterContext";
 import { useIsMobile } from "./useIsMobile";
+
+const EASING: Record<Ease, (t: number) => number> = {
+  linear: (t) => t,
+  in: cubicBezier(0.55, 0, 1, 0.45),
+  out: cubicBezier(0.33, 1, 0.68, 1),
+};
 
 type Placement = { x: number; y: number; rotate?: number; scale?: number };
 
@@ -38,9 +44,10 @@ export function Piece({
       : { x, y, rotate, scale };
 
   const track = pieceTrack({ from, enterAt, rotate: place.rotate, enter: !isFirst, exit: !isLast });
-  const tx = useTransform(progress, track.input, track.x.map((v) => `${v}vw`));
-  const ty = useTransform(progress, track.input, track.y.map((v) => `${v}vh`));
-  const tr = useTransform(progress, track.input, track.rotate);
+  const ease = { ease: track.ease.map((e) => EASING[e]) };
+  const tx = useTransform(progress, track.input, track.x.map((v) => `${v}vw`), ease);
+  const ty = useTransform(progress, track.input, track.y.map((v) => `${v}vh`), ease);
+  const tr = useTransform(progress, track.input, track.rotate, ease);
 
   if (isMobile && hideOnMobile) return null;
 
