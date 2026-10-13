@@ -1,12 +1,13 @@
 "use client";
 
 import { useRef, useState, type ReactNode } from "react";
-import { useMotionValueEvent, useScroll } from "framer-motion";
+import { useMotionValueEvent, useScroll, useSpring } from "framer-motion";
 import { chapters, type ChapterMeta } from "@/content/chapters";
 import { SECTION_CLASS, STAGE_CLASS, stageInteractive } from "@/lib/chapterLayout";
 import { ChapterContext, type ChapterContextValue } from "./chapterContext";
 import { ChapterLabel } from "./ChapterLabel";
 import { Piece } from "./Piece";
+import { useIsMobile } from "./useIsMobile";
 import { usePrefersReducedMotion } from "./usePrefersReducedMotion";
 
 type ChapterProps = {
@@ -27,7 +28,13 @@ export function Chapter({ meta, children }: ChapterProps) {
   const [onMat, setOnMat] = useState(() => stageInteractive(scrollYProgress.get(), isFirst, isLast));
   useMotionValueEvent(scrollYProgress, "change", (p) => setOnMat(stageInteractive(p, isFirst, isLast)));
 
-  const value: ChapterContextValue = { progress: scrollYProgress, isFirst, isLast, still };
+  // Phones scroll on the compositor while pieces are placed from JS a frame behind, which reads as
+  // judder. A light spring lets pieces glide continuously instead; it settles in well under a second.
+  const isMobile = useIsMobile();
+  const smoothed = useSpring(scrollYProgress, { stiffness: 220, damping: 34, mass: 0.5, restDelta: 0.0005 });
+  const progress = isMobile ? smoothed : scrollYProgress;
+
+  const value: ChapterContextValue = { progress, isFirst, isLast, still };
 
   return (
     <ChapterContext.Provider value={value}>

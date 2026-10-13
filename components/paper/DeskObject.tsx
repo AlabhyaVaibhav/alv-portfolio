@@ -20,7 +20,7 @@ export function DeskObject({ name, className = "" }: DeskObjectProps) {
       height={size[1]}
       draggable={false}
       style={{ width: `calc(var(--cm) * ${cm})` } as CSSProperties}
-      className={`pointer-events-none h-auto max-w-none select-none [filter:drop-shadow(0_2px_2px_rgba(0,0,0,0.25))_drop-shadow(0_10px_14px_rgba(0,0,0,0.28))] ${className}`}
+      className={`pointer-events-none h-auto max-w-none select-none [filter:drop-shadow(0_2px_2px_rgba(0,0,0,0.25))_drop-shadow(0_10px_14px_rgba(0,0,0,0.28))] max-md:[filter:drop-shadow(0_4px_4px_rgba(0,0,0,0.3))] ${className}`}
     />
   );
 }
