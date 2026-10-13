@@ -8,6 +8,8 @@ import { BinderClip } from "@/components/paper/BinderClip";
 import { Squiggle } from "@/components/paper/Squiggle";
 import type { Project } from "@/content/projects";
 
+const KIND_LABEL: Record<Project["kind"], string> = { client: "Client", internal: "Internal", writing: "Article" };
+
 export function ProjectCard({ project }: { project: Project }) {
   const { name, kind, blurb, link, image, note, caseStudy } = project;
   const [open, setOpen] = useState(false);
@@ -32,7 +34,7 @@ export function ProjectCard({ project }: { project: Project }) {
           </span>
         )}
         <span className="absolute right-2.5 top-2.5 rounded-full bg-paper px-3 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-ink shadow-sm md:right-3 md:top-3 md:text-[10px]">
-          {kind === "client" ? "Client" : "Internal"}
+          {KIND_LABEL[kind]}
         </span>
         {note && (
           <span className="absolute bottom-3 left-2 -rotate-6 bg-sticky-yellow px-2.5 py-1 font-hand text-xl leading-none text-ink shadow-sm md:text-2xl">

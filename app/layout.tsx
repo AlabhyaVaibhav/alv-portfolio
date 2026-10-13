@@ -22,7 +22,7 @@ const hand = Caveat({
 
 export const metadata: Metadata = {
   title: "Alabhya Vaibhav",
-  description: "Product manager, photographer, side-project builder, and Bailey's driver.",
+  description: "Product manager at Itron. Photographer, side-project builder, and Bailey's driver.",
 };
 
 export default function RootLayout({

@@ -2,7 +2,7 @@ export type CaseStudy = { problem: string; approach: string; outcome: string };
 
 export type Project = {
   name: string;
-  kind: "client" | "internal";
+  kind: "client" | "internal" | "writing";
   blurb: string;
   link?: string;
   // Screenshot for the card, e.g. "/projects/twine.png" (file in public/projects/). Hatched placeholder until set.
@@ -42,9 +42,23 @@ export const projects: Project[] = [
   {
     name: "How Your City Moves",
     kind: "internal",
-    // TODO(copy): confirm this one-liner.
-    blurb: "A dot-matrix look at how people move through Bangalore.",
+    blurb:
+      "A dot-matrix look at how people commute across nine cities. Your commute stays in your browser: no accounts, and city stats are opt-in and anonymous.",
     link: "https://how-your-city-moves.vercel.app/",
     caseStudy: PLACEHOLDER_CASE,
+  },
+  {
+    name: "IPL Prediction League",
+    kind: "internal",
+    blurb:
+      "A prediction league for a YouTube community: daily match picks, season-long picks, a live schedule and a real-time leaderboard. React, Firebase.",
+    caseStudy: PLACEHOLDER_CASE,
+  },
+  {
+    name: "PMs Are Becoming Builders Again!",
+    kind: "writing",
+    blurb:
+      "Building got cheap, so being wrong got cheap too. The PM bottleneck has moved from capacity to judgment: what's worth building, and what good looks like.",
+    link: "https://www.linkedin.com/pulse/pms-becoming-builders-again-alabhya-vaibhav-hb6hf/",
   },
 ];

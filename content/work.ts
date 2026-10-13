@@ -14,6 +14,8 @@ export type Company = {
   name: string;
   location: string;
   years: string;
+  // What the company was about, in a few words: printed on its artifact in the Day job chapter.
+  focus?: string;
   isInternship?: boolean;
   // Condensed cards for the Day job chapter.
   highlights?: Highlight[];
@@ -22,9 +24,32 @@ export type Company = {
 
 export const workHistory: Company[] = [
   {
+    name: "Itron",
+    location: "Bengaluru",
+    focus: "worker safety",
+    years: "2026–now",
+    // TODO(copy): sharpen these once there's something to show; no numbers yet, so none are claimed.
+    highlights: [
+      { title: "Worker safety", metric: "Product · since Apr 2026", line: "Building worker safety as a product: keeping the people on the job safe." },
+      { title: "SDLC → AIDLC", metric: "Owning the migration", line: "Moving how the team builds from a classic SDLC to an AI-driven development lifecycle." },
+    ],
+    positions: [
+      {
+        title: "Product Manager",
+        dates: "Apr 2026 – Present",
+        bullets: [
+          "Product manager for worker safety",
+          "Looking after the migration from SDLC to AIDLC (AI-driven development lifecycle)",
+        ],
+      },
+    ],
+  },
+  {
     name: "CommerceIQ",
     location: "Bengaluru",
-    years: "2021–now",
+    focus: "e-commerce analytics",
+    // TODO(copy): confirm the leaving month (joined Itron 6 Apr 2026).
+    years: "2021–26",
     highlights: [
       { title: "Ally · AI Insights", metric: "New ARR + GDR", line: "Omni-channel AI recommendations surfaced inside the platform." },
       { title: "Reporting platform", metric: "−79% manual work · ~$500K/yr", line: "Automated cross-product decks so CSMs could focus on customers." },
@@ -34,7 +59,7 @@ export const workHistory: Company[] = [
     positions: [
       {
         title: "Product Manager, Platform",
-        dates: "Mar 2023 – Present",
+        dates: "Mar 2023 – Mar 2026",
         bullets: [
           "Led development of the Omni Channel AI Insights Platform (Ally), driving new ARR growth and strengthening GDR positioning by surfacing AI-driven recommendations",
           "Launched a cross-product reporting platform with automated decks, reducing manual reporting effort by 79% — leading to ~$500K annual savings and enabling CSMs to focus on strategic customer engagements",
@@ -63,6 +88,7 @@ export const workHistory: Company[] = [
   {
     name: "Soroco",
     location: "Bengaluru",
+    focus: "process mining & automation",
     years: "2020–21",
     positions: [
       {
@@ -78,6 +104,7 @@ export const workHistory: Company[] = [
   {
     name: "Quikr",
     location: "Bengaluru",
+    focus: "jobs for the blue-collar sector",
     years: "2018–20",
     positions: [
       {

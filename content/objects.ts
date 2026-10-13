@@ -27,6 +27,10 @@ export const OBJECTS = {
   "tangled-earphones": { size: [632, 544], cm: 9 },
   "washi-masking-tape": { size: [620, 720], cm: 10.5 },
   "wireframe-sheets": { size: [711, 800], cm: 29 },
+  "hard-hat": { size: [664, 722], cm: 26.8 },
+  "near-miss-report": { size: [632, 784], cm: 18.8 },
+  "safety-checklist-clipboard": { size: [659, 800], cm: 28 },
+  "walkie-talkie": { size: [400, 666], cm: 11.6 },
 } as const satisfies Record<string, { size: readonly [number, number]; cm: number }>;
 
 export type ObjectName = keyof typeof OBJECTS;
