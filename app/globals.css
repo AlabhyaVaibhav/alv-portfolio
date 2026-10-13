@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+@theme inline {
+  /* A muted, darker green (was #1f5a4b): less saturation so cream text and paper read cleanly. */
+  --color-mat: #253e39;
+  --color-cream: #f3efe2;
+  --color-paper: #fbfaf6;
+  --color-ink: #2b2620;
+  --color-kraft: #c9a477;
+  --color-kraft-ink: #2b1f14;
+  --color-sticky-yellow: #f6d77a;
+  --color-sticky-pink: #f2b8a2;
+  --font-display: var(--font-instrument-serif);
+  --font-mono: var(--font-jetbrains-mono);
+  --font-hand: var(--font-caveat);
+}
+
+/* Background lives on <html> only: a body background would paint over the fixed mat. */
+html {
+  background: #253e39;
+  color: #f3efe2;
+}
+
+body {
+  overflow-x: clip;
+}
+
+/* Real-world scale for desk objects: one centimetre on the mat. Every object is `cm` wide x this. */
+:root {
+  --cm: 2.6vw;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --cm: min(0.95vw, 15px);
+  }
+}
+
+.mat {
+  background-color: var(--color-mat);
+  background-image:
+    linear-gradient(rgba(240, 236, 220, 0.24) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240, 236, 220, 0.24) 1px, transparent 1px),
+    linear-gradient(rgba(240, 236, 220, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(240, 236, 220, 0.08) 1px, transparent 1px);
+  background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+}
+
+.drop-object {
+  filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.35));
+}
+
+/* Phones: one small shadow instead of a wide blur on every moving piece, which is costly to repaint. */
+@media (max-width: 767px) {
+  .drop-object {
+    filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.3));
+  }
+}
+
+.paper-torn {
+  clip-path: polygon(
+    0% 6%, 4% 0%, 9% 4%, 15% 1%, 22% 5%, 30% 0%, 37% 3%, 45% 1%, 52% 5%, 60% 0%, 68% 4%, 75% 1%, 83% 5%, 90% 0%, 96% 3%, 100% 1%,
+    99% 30%, 100% 60%, 98% 100%, 92% 96%, 85% 100%, 77% 95%, 70% 99%, 62% 95%, 55% 100%, 47% 96%, 40% 100%, 32% 95%, 25% 99%,
+    17% 95%, 10% 100%, 4% 96%, 0% 99%, 1% 60%, 0% 30%
+  );
+}
+
+.paper-kraft {
+  background-color: var(--color-kraft);
+  background-image:
+    radial-gradient(rgba(90, 60, 30, 0.1) 1px, transparent 1.5px),
+    radial-gradient(rgba(255, 240, 210, 0.25) 1px, transparent 1.5px);
+  background-size: 7px 7px, 11px 11px;
+}
+
+.bg-grain {
+  position: relative;
+}
+
+.bg-grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0.08;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Phones: no full-screen blended grain. Blending it over moving pieces re-composites the whole screen
+   every frame, and at phone pixel density the grain is barely visible anyway. */
+@media (max-width: 767px) {
+  .bg-grain::before {
+    display: none;
+  }
+}
+
+/* Graph paper: a fine grid with a heavier line every fifth square. */
+.paper-grid {
+  background-color: #f4f0e1;
+  background-image:
+    linear-gradient(rgba(120, 140, 110, 0.22) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 140, 110, 0.22) 1px, transparent 1px),
+    linear-gradient(rgba(120, 140, 110, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120, 140, 110, 0.09) 1px, transparent 1px);
+  background-size: 110px 110px, 110px 110px, 22px 22px, 22px 22px;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ink write-on: a soft-edged mask sweeps left to right so text appears as if drawn out of the mat.
+   Set --ink-delay and --ink-dur inline. The padding gives italic overhangs and descenders room
+   inside the mask; the negative margin keeps the layout unchanged. */
+.ink-write {
+  padding: 0.14em 0.18em;
+  margin: -0.14em -0.18em;
+  mask-image: linear-gradient(90deg, #000 0 40%, transparent 60% 100%);
+  mask-size: 250% 100%;
+  mask-repeat: no-repeat;
+  mask-position: 100% 0;
+  animation: ink-write var(--ink-dur, 0.9s) cubic-bezier(0.45, 0.05, 0.55, 0.95) var(--ink-delay, 0s) both;
+}
+
+@keyframes ink-write {
+  from {
+    mask-position: 100% 0;
+    filter: blur(1.5px);
+  }
+  to {
+    mask-position: 0 0;
+    filter: blur(0);
+  }
+}
+
+/* A sketch-pen stroke drawing itself. The path needs pathLength="1". */
+.pen-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: pen-draw var(--ink-dur, 0.6s) cubic-bezier(0.6, 0, 0.3, 1) var(--ink-delay, 0s) forwards;
+}
+
+@keyframes pen-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ink-write {
+    animation: none;
+    mask-image: none;
+  }
+  .pen-draw {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
