@@ -67,10 +67,10 @@ export function Cover() {
       {/* Itself a sticky note, so it peels and drags: the first hint that the desk is interactive.
           Wide screens have room beside the headline; narrower ones get it below. */}
       <Piece x={4} y={31} rotate={-4} from="left" enterAt={0.04} hideOnMobile className="max-xl:hidden">
-        <StickyNote bodyClassName={WELCOME_BODY}>{site.welcomeNote}</StickyNote>
+        <StickyNote bodyClassName={WELCOME_BODY} outlineDelay={end.delay + end.dur + 0.6}>{site.welcomeNote}</StickyNote>
       </Piece>
       <Piece x={52} y={58} rotate={4} from="bottom" enterAt={0.04} mobile={{ x: 50, y: 59, rotate: 4 }} className="xl:hidden">
-        <StickyNote bodyClassName={WELCOME_BODY}>{site.welcomeNote}</StickyNote>
+        <StickyNote bodyClassName={WELCOME_BODY} outlineDelay={end.delay + end.dur + 0.6}>{site.welcomeNote}</StickyNote>
       </Piece>
       <Piece x={44} y={88} hideOnMobile>
         <MarkerNote arrow="down">scroll</MarkerNote>

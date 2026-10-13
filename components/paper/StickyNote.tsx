@@ -3,12 +3,16 @@
 import type { CSSProperties, ReactNode } from "react";
 import { motion } from "framer-motion";
 import { useFinePointer } from "@/components/mat/useFinePointer";
+import { ChalkOutline } from "./ChalkOutline";
 
 type StickyNoteProps = {
   children: ReactNode;
   color?: "yellow" | "pink";
   // Size and padding of the note itself. Defaults to a square note with big handwriting.
   bodyClassName?: string;
+  // Circle the note in chalk, drawn after this many seconds, to set it apart from the other paper.
+  // Lives inside the draggable layer so it moves with the note.
+  outlineDelay?: number;
   className?: string;
 };
 
@@ -26,6 +30,7 @@ export function StickyNote({
   children,
   color = "yellow",
   bodyClassName = "aspect-square w-[38vw] p-3 text-2xl md:w-[170px] md:p-4",
+  outlineDelay,
   className = "",
 }: StickyNoteProps) {
   const canDrag = useFinePointer();
@@ -53,6 +58,7 @@ export function StickyNote({
           clipPath: "polygon(0 0, 100% 0, 0 100%)",
         }}
       />
+      {outlineDelay !== undefined && <ChalkOutline delay={outlineDelay} />}
     </motion.div>
   );
 }
