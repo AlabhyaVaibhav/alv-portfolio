@@ -1,9 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useSyncExternalStore } from "react";
+import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { aspectClass, type PhotoSlot } from "@/content/photography";
+
+const subscribeNever = () => () => {};
 
 type LightboxProps = {
   slots: PhotoSlot[];
@@ -24,7 +27,11 @@ export function Lightbox({ slots, activeIndex, onClose, onNavigate }: LightboxPr
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [slot, onClose]);
 
-  return (
+  const isClient = useSyncExternalStore(subscribeNever, () => true, () => false);
+  if (!isClient) return null;
+
+  // Portaled to <body>: chapter stages are fixed, pointer-events-none stacking contexts.
+  return createPortal(
     <AnimatePresence>
       {slot && activeIndex !== null && (
         <motion.div
@@ -60,11 +67,11 @@ export function Lightbox({ slots, activeIndex, onClose, onNavigate }: LightboxPr
             <button
               type="button"
               onClick={onClose}
-              className="absolute -top-10 right-0 text-sm uppercase tracking-widest text-paper/80"
+              className="absolute -top-10 right-0 font-mono text-sm uppercase tracking-widest text-paper/80"
             >
               Close
             </button>
-            <div className="absolute -bottom-10 flex w-full justify-between text-sm uppercase tracking-widest text-paper/80">
+            <div className="absolute -bottom-10 flex w-full justify-between font-mono text-sm uppercase tracking-widest text-paper/80">
               <button
                 type="button"
                 onClick={() =>
@@ -83,6 +90,7 @@ export function Lightbox({ slots, activeIndex, onClose, onNavigate }: LightboxPr
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body,
   );
 }

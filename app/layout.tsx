@@ -1,28 +1,37 @@
 import type { Metadata } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Caveat, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+import { Mat } from "@/components/mat/Mat";
 import "./globals.css";
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
+const display = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+});
+
+const mono = JetBrains_Mono({
+  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const hand = Caveat({
+  variable: "--font-caveat",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
   title: "Alabhya Vaibhav",
-  description: "Product Manager, photographer, and builder of Twine.",
+  description: "Product manager, photographer, side-project builder, and Bailey's driver.",
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
-      <body className="bg-grain bg-paper font-sans text-ink antialiased">
+    <html lang="en" className={`${display.variable} ${mono.variable} ${hand.variable}`}>
+      <body className="bg-grain font-mono text-cream antialiased">
+        <Mat />
         {children}
       </body>
     </html>
