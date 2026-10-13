@@ -39,8 +39,9 @@ export function ProjectCarousel({ projects }: { projects: Project[] }) {
   };
 
   const scrollable = !(edges.atStart && edges.atEnd);
+  // Always opaque: a see-through disabled button let the sheet edge and grid show through it.
   const arrow =
-    "flex h-9 w-9 items-center justify-center rounded-full bg-paper font-mono text-base text-ink shadow-md transition-opacity hover:bg-white disabled:opacity-60 disabled:text-ink/30 md:h-10 md:w-10";
+    "flex h-10 w-10 items-center justify-center rounded-full bg-paper font-mono text-base text-ink shadow-md transition-colors hover:bg-white disabled:cursor-default disabled:bg-[#e9e6dc] disabled:text-ink/30 disabled:shadow-sm md:h-11 md:w-11";
 
   return (
     <div className="paper-grid drop-object relative w-[92vw] rounded-[22px] pb-6 pt-2 md:rounded-[28px] md:pb-8 md:pt-3">
@@ -59,8 +60,8 @@ export function ProjectCarousel({ projects }: { projects: Project[] }) {
         ))}
       </div>
       {scrollable && (
-        // Hangs off the sheet's bottom edge so it costs no height.
-        <div className="absolute -bottom-4 right-5 flex gap-2 md:-bottom-5 md:right-8">
+        // Sits on the mat just below the sheet, clear of its edge, so it costs the sheet no height.
+        <div className="absolute right-5 top-[calc(100%+12px)] flex gap-2.5 md:right-8 md:top-[calc(100%+14px)]">
           <button type="button" aria-label="Previous project" onClick={() => step(-1)} disabled={edges.atStart} className={arrow}>
             ←
           </button>
