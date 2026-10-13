@@ -17,11 +17,11 @@ const CARD_PLACES = [
 
 // PM paperwork in the gaps between the cards.
 const OBJECTS: ScatterItem[] = [
-  { name: "ship-it-stickies", x: 52, y: 5, rotate: 4, from: "top", width: "md:w-[min(13vw,220px)]", mobile: null },
-  { name: "not-building-card", x: 33, y: 43, rotate: -5, from: "bottom", width: "md:w-[min(14vw,230px)]", mobile: null },
-  { name: "prd-printout", x: 74, y: 44, rotate: 7, from: "right", width: "md:w-[min(14vw,230px)]", mobile: null },
-  { name: "red-pen", x: 66, y: 66, rotate: 30, from: "right", width: "md:w-[min(9vw,150px)]", mobile: null },
-  { name: "highlighters", x: 4, y: 76, rotate: -20, from: "left", width: "md:w-[min(8vw,130px)]", mobile: null },
+  { name: "ship-it-stickies", x: 52, y: 5, rotate: 4, from: "top", mobile: null },
+  { name: "not-building-card", x: 33, y: 43, rotate: -5, from: "bottom", mobile: null },
+  { name: "prd-printout", x: 74, y: 44, rotate: 7, from: "right", mobile: null },
+  { name: "red-pen", x: 66, y: 66, rotate: 30, from: "right", mobile: null },
+  { name: "highlighters", x: 4, y: 76, rotate: -20, from: "left", mobile: null },
 ];
 
 export function DayJob() {

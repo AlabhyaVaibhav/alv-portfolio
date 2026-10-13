@@ -19,10 +19,10 @@ const PLACES = [
 
 // The rest of the desk.
 const OBJECTS: ScatterItem[] = [
-  { name: "succulent", x: 31, y: 5, rotate: 0, from: "top", width: "md:w-[min(9vw,150px)]", mobile: null },
-  { name: "chai-cup", x: 88, y: 42, rotate: 0, from: "right", width: "w-[24vw] md:w-[min(8vw,130px)]", mobile: { x: 4, y: 80 } },
-  { name: "glasses-and-watch", x: 73, y: 78, rotate: -6, from: "bottom", width: "md:w-[min(14vw,230px)]", mobile: null },
-  { name: "tangled-earphones", x: 21, y: 79, rotate: 10, from: "left", width: "md:w-[min(9vw,150px)]", mobile: null },
+  { name: "succulent", x: 31, y: 5, rotate: 0, from: "top", mobile: null },
+  { name: "chai-cup", x: 88, y: 42, rotate: 0, from: "right", mobile: { x: 4, y: 80 } },
+  { name: "glasses-and-watch", x: 73, y: 78, rotate: -6, from: "bottom", mobile: null },
+  { name: "tangled-earphones", x: 21, y: 79, rotate: 10, from: "left", mobile: null },
 ];
 
 export function Bailey() {

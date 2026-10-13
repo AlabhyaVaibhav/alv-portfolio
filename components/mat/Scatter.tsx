@@ -9,8 +9,6 @@ export type ScatterItem = {
   y: number;
   rotate: number;
   from: Edge;
-  // Width classes for the object, e.g. "w-[40vw] md:w-[min(15vw,250px)]".
-  width: string;
   // Where it sits on phones; null hides it there.
   mobile: { x: number; y: number; rotate?: number } | null;
   enterAt?: number;
@@ -30,7 +28,7 @@ export function Scatter({ items }: { items: ScatterItem[] }) {
       mobile={o.mobile ? { rotate: o.rotate, ...o.mobile } : undefined}
       hideOnMobile={o.mobile === null}
     >
-      <DeskObject name={o.name} className={o.width} />
+      <DeskObject name={o.name} />
     </Piece>
   ));
 }

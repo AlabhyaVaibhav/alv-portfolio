@@ -8,10 +8,10 @@ import { featuredFirst } from "@/lib/projectOrder";
 
 // Planning artifacts peeking out from under the sheet.
 const OBJECTS: ScatterItem[] = [
-  { name: "kanban-mini-board", x: 52, y: -3, rotate: -4, from: "top", width: "md:w-[min(15vw,250px)]", mobile: null },
-  { name: "roadmap-strip", x: 6, y: 76, rotate: -3, from: "left", width: "w-[72vw] md:w-[min(26vw,430px)]", mobile: { x: 6, y: 78 } },
-  { name: "prioritization-cards", x: 70, y: 77, rotate: 6, from: "right", width: "md:w-[min(15vw,250px)]", mobile: null },
-  { name: "pencil", x: 40, y: 88, rotate: -8, from: "bottom", width: "md:w-[min(12vw,200px)]", mobile: null },
+  { name: "kanban-mini-board", x: 52, y: -3, rotate: -4, from: "top", mobile: null },
+  { name: "roadmap-strip", x: 6, y: 76, rotate: -3, from: "left", mobile: { x: 6, y: 78 } },
+  { name: "prioritization-cards", x: 70, y: 77, rotate: 6, from: "right", mobile: null },
+  { name: "pencil", x: 40, y: 88, rotate: -8, from: "bottom", mobile: null },
 ];
 
 export function SideProjects() {

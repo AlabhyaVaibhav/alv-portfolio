@@ -24,6 +24,17 @@ body {
   overflow-x: clip;
 }
 
+/* Real-world scale for desk objects: one centimetre on the mat. Every object is `cm` wide x this. */
+:root {
+  --cm: 2.6vw;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --cm: min(0.95vw, 15px);
+  }
+}
+
 .mat {
   background-color: var(--color-mat);
   background-image:

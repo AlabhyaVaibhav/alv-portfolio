@@ -10,9 +10,9 @@ import { site } from "@/content/site";
 
 // Things you'd send or pin up.
 const OBJECTS: ScatterItem[] = [
-  { name: "postcard", x: 43, y: 7, rotate: -6, from: "top", width: "md:w-[min(16vw,260px)]", mobile: null },
-  { name: "laptop-corner", x: -3, y: 72, rotate: 14, from: "left", width: "md:w-[min(19vw,310px)]", mobile: null },
-  { name: "paper-clips", x: 33, y: 36, rotate: 0, from: "bottom", width: "md:w-[min(6vw,100px)]", mobile: null },
+  { name: "postcard", x: 43, y: 7, rotate: -6, from: "top", mobile: null },
+  { name: "laptop-corner", x: -3, y: 72, rotate: 14, from: "left", mobile: null },
+  { name: "paper-clips", x: 33, y: 36, rotate: 0, from: "bottom", mobile: null },
 ];
 
 export function SayHi() {
