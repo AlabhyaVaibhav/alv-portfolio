@@ -1,0 +1,9 @@
+# Keep CLI deploys to what the site needs: no raw originals, generated sources, or local tooling.
+photography/
+assets/
+docs/
+.superpowers/
+out/
+.next/
+node_modules/
+tests/
