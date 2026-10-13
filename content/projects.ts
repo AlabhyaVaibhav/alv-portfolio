@@ -3,13 +3,14 @@ export type Project = {
   kind: "client" | "internal";
   blurb: string;
   link?: string;
+  // Screenshot for the card, e.g. "/projects/twine.png" (file in public/projects/). Hatched placeholder until set.
+  image?: string;
   featured?: boolean;
   // Short handwritten sticky note attached to the card.
   note?: string;
 };
 
-// Add, remove, or reorder freely: the Side projects chapter lays out 1–6 projects
-// automatically (featured first). Anything past 6 is not shown.
+// Add, remove, or reorder freely: the Side projects chapter shows them all in a carousel, featured first.
 export const projects: Project[] = [
   {
     name: "Twine",
