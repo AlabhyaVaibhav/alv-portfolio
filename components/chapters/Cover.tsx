@@ -4,6 +4,7 @@ import { Scatter, type ScatterItem } from "@/components/mat/Scatter";
 import type { CSSProperties } from "react";
 import { MarkerNote } from "@/components/paper/MarkerNote";
 import { PenUnderline } from "@/components/paper/PenUnderline";
+import { StickyNote } from "@/components/paper/StickyNote";
 import { chapters } from "@/content/chapters";
 import { site } from "@/content/site";
 
@@ -16,6 +17,8 @@ const OBJECTS: ScatterItem[] = [
   { name: "binder-clips", x: 72, y: 63, rotate: -9, from: "right", mobile: { x: 70, y: 7, rotate: 10 } },
   { name: "chisel-tip-marker", x: 25, y: 70, rotate: -62, from: "bottom", mobile: null },
 ];
+
+const WELCOME_BODY = "w-[44vw] p-3.5 text-[19px] md:w-[210px] md:p-4 md:text-[21px] xl:w-[min(14vw,220px)]";
 
 // Write-on timing, in seconds: the greeting, then each headline line at a pace set by its length,
 // then the underline once the last word is down.
@@ -60,6 +63,14 @@ export function Cover() {
             </span>
           </h1>
         </div>
+      </Piece>
+      {/* Itself a sticky note, so it peels and drags: the first hint that the desk is interactive.
+          Wide screens have room beside the headline; narrower ones get it below. */}
+      <Piece x={4} y={31} rotate={-4} from="left" enterAt={0.04} hideOnMobile className="max-xl:hidden">
+        <StickyNote bodyClassName={WELCOME_BODY}>{site.welcomeNote}</StickyNote>
+      </Piece>
+      <Piece x={52} y={58} rotate={4} from="bottom" enterAt={0.04} mobile={{ x: 50, y: 59, rotate: 4 }} className="xl:hidden">
+        <StickyNote bodyClassName={WELCOME_BODY}>{site.welcomeNote}</StickyNote>
       </Piece>
       <Piece x={44} y={88} hideOnMobile>
         <MarkerNote arrow="down">scroll</MarkerNote>
