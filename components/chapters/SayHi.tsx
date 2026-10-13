@@ -8,11 +8,12 @@ import { TornStrip } from "@/components/paper/TornStrip";
 import { chapters } from "@/content/chapters";
 import { site } from "@/content/site";
 
-// Things you'd send or pin up.
+// Things you'd send or pin up. The laptop photo is only a corner of the lid, cut off along the image's
+// top and left edges: it's turned round so those cuts run off the bottom-right of the screen.
 const OBJECTS: ScatterItem[] = [
   { name: "postcard", x: 43, y: 7, rotate: -6, from: "top", mobile: null },
-  { name: "laptop-corner", x: -3, y: 72, rotate: 14, from: "left", mobile: null },
-  { name: "paper-clips", x: 33, y: 36, rotate: 0, from: "bottom", mobile: null },
+  { name: "laptop-corner", x: 82, y: 78, rotate: 184, from: "right", mobile: null },
+  { name: "washi-masking-tape", x: 35, y: 35, rotate: -8, from: "bottom", mobile: null },
 ];
 
 export function SayHi() {
@@ -22,7 +23,7 @@ export function SayHi() {
       <Piece x={6} y={12} from="left" enterAt={0.02} mobile={{ x: 5, y: 10 }}>
         <h2 className="font-display text-[22vw] italic leading-none text-cream md:text-[10vw]">Say hi.</h2>
       </Piece>
-      <Piece x={8} y={44} rotate={-3} from="bottom" enterAt={0.06} mobile={{ x: 4, y: 32, rotate: -2 }}>
+      <Piece x={8} y={44} rotate={-3} from="bottom" enterAt={0.06} mobile={{ x: 4, y: 29, rotate: -2 }}>
         <div className="drop-object">
           <div className="w-[88vw] bg-paper p-6 text-ink md:w-[380px]">
             <p className="font-display text-3xl italic">{site.name}</p>
@@ -40,7 +41,7 @@ export function SayHi() {
           </div>
         </div>
       </Piece>
-      <Piece x={56} y={40} rotate={6} from="right" enterAt={0.1} mobile={{ x: 46, y: 61, rotate: 5 }}>
+      <Piece x={56} y={43} rotate={6} from="right" enterAt={0.1} mobile={{ x: 46, y: 61, rotate: 5 }}>
         <a href={site.resumeHref} download className="drop-object block transition-transform hover:-translate-y-1">
           <div className="paper-kraft relative w-[44vw] rounded-l-[48px] rounded-r-md py-6 pl-14 pr-6 text-kraft-ink md:w-[260px]">
             <span aria-hidden className="absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 rounded-full bg-mat ring-2 ring-kraft-ink/40" />

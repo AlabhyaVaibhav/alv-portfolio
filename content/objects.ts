@@ -2,7 +2,7 @@
 // `size` is the image in pixels; `cm` is how wide the image is in real life, so every object is drawn
 // at true scale against the others (a pen is ~1.8x a sticky note). Widths were set from each object's
 // measured long side (minimum rotated bounding box) and its real length: A4 29.7cm, A5 open 29.6cm,
-// sticky note 7.6cm, index card 12.7cm, postcard 14.8cm, pens ~14cm, pencil 17.5cm, paper clip 3.3cm.
+// sticky note 7.6cm, index card 12.7cm, postcard 14.8cm, pens ~14cm, pencil 17.5cm, torn tape strips ~10cm.
 // The full set of generated objects, with transparent PNG cutouts, lives in assets/ and assets/cutouts/.
 export const OBJECTS = {
   "binder-clips": { size: [602, 746], cm: 11.6 },
@@ -15,7 +15,6 @@ export const OBJECTS = {
   "kanban-mini-board": { size: [756, 586], cm: 23 },
   "laptop-corner": { size: [765, 800], cm: 25 },
   "not-building-card": { size: [800, 643], cm: 14 },
-  "paper-clips": { size: [596, 662], cm: 9.5 },
   "pencil": { size: [758, 188], cm: 17.1 },
   "postcard": { size: [722, 604], cm: 17 },
   "prd-printout": { size: [643, 800], cm: 26.5 },
@@ -26,6 +25,7 @@ export const OBJECTS = {
   "sticky-note-stack": { size: [800, 798], cm: 11.2 },
   "succulent": { size: [492, 496], cm: 8 },
   "tangled-earphones": { size: [632, 544], cm: 9 },
+  "washi-masking-tape": { size: [620, 720], cm: 10.5 },
   "wireframe-sheets": { size: [711, 800], cm: 29 },
 } as const satisfies Record<string, { size: readonly [number, number]; cm: number }>;
 
