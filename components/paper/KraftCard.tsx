@@ -13,7 +13,7 @@ type KraftCardProps = {
 };
 
 const WIDTH = {
-  md: "w-[42vw] md:w-[min(20vw,280px)]",
+  md: "w-[42vw] md:w-[min(22vw,330px)]",
   lg: "w-[42vw] md:w-[min(30vw,420px)]",
 };
 
@@ -21,15 +21,15 @@ export function KraftCard({ title, tag, metric, children, tape = true, size = "m
   const body = (
     <div className={`paper-kraft relative p-3 text-kraft-ink md:p-4 ${WIDTH[size]}`}>
       {tag && (
-        <span className="absolute right-2 top-2 -rotate-3 border border-kraft-ink/60 px-1.5 py-0.5 font-mono text-[8px] uppercase tracking-[0.14em] md:right-3 md:top-3 md:text-[9px]">
+        <span className="absolute right-2 top-2 -rotate-3 border border-kraft-ink/60 px-1.5 py-0.5 font-mono text-[8px] uppercase tracking-[0.14em] md:right-3 md:top-3 md:text-[10px]">
           {tag}
         </span>
       )}
-      <h3 className={`font-display italic leading-tight ${tag ? "pr-14" : ""} ${size === "lg" ? "text-2xl md:text-4xl" : "text-xl md:text-2xl"}`}>
+      <h3 className={`font-display italic leading-tight ${tag ? "pr-14" : ""} ${size === "lg" ? "text-2xl md:text-4xl" : "text-[22px] md:text-[30px]"}`}>
         {title}
       </h3>
-      {metric && <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.08em] md:text-[11px]">{metric}</p>}
-      {children && <div className="mt-2 font-mono text-[10.5px] leading-relaxed md:text-[11.5px]">{children}</div>}
+      {metric && <p className="mt-1 font-mono text-[10px] font-bold uppercase tracking-[0.08em] md:text-[12px]">{metric}</p>}
+      {children && <div className="mt-2 font-mono text-[11px] leading-relaxed md:text-[13px]">{children}</div>}
     </div>
   );
 

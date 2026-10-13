@@ -14,7 +14,7 @@ type ChapterProps = {
   children: ReactNode;
 };
 
-// A 250vh scroll spacer whose stage is fixed over the mat. Progress runs 0→1 from the moment the
+// A 160vh scroll spacer whose stage is fixed over the mat. Progress runs 0→1 from the moment the
 // section's top enters the viewport bottom until its bottom reaches the viewport bottom, so
 // consecutive chapters hand over with no empty scroll in between.
 export function Chapter({ meta, children }: ChapterProps) {

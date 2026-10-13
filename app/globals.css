@@ -60,7 +60,7 @@ body {
 .paper-kraft {
   background-color: var(--color-kraft);
   background-image:
-    radial-gradient(rgba(90, 60, 30, 0.18) 1px, transparent 1.5px),
+    radial-gradient(rgba(90, 60, 30, 0.1) 1px, transparent 1.5px),
     radial-gradient(rgba(255, 240, 210, 0.25) 1px, transparent 1.5px);
   background-size: 7px 7px, 11px 11px;
 }

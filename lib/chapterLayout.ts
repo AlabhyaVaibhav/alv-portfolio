@@ -1,7 +1,7 @@
 // Layout classes for a chapter. The static HTML is rendered without knowing the visitor's motion
 // preference, so the reduced-motion layout comes from CSS (motion-reduce:) and is right on first paint.
 export const SECTION_CLASS =
-  "relative h-[250vh] motion-reduce:h-auto motion-reduce:min-h-[110vh] md:motion-reduce:min-h-screen";
+  "relative h-[160vh] motion-reduce:h-auto motion-reduce:min-h-[110vh] md:motion-reduce:min-h-screen";
 
 export const STAGE_CLASS =
   "pointer-events-none fixed inset-0 motion-reduce:pointer-events-auto motion-reduce:relative motion-reduce:inset-auto motion-reduce:min-h-[110vh] md:motion-reduce:min-h-screen";

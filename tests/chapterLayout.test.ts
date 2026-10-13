@@ -4,8 +4,10 @@ import { SECTION_CLASS, STAGE_CLASS, stageInteractive } from "../lib/chapterLayo
 
 // The static HTML is rendered without knowing the visitor's motion preference, so the
 // reduced-motion layout must come from CSS (motion-reduce:) rather than a JS-chosen class.
-test("section drops the 250vh scroll spacer under reduced motion via CSS", () => {
-  assert.match(SECTION_CLASS, /(^| )h-\[250vh\]( |$)/);
+// 160vh per chapter: enough scroll for pieces to land and be read, without six chapters
+// adding up to a long slog (250vh each made the page ~15 screens).
+test("section is a 160vh scroll spacer, dropped under reduced motion via CSS", () => {
+  assert.match(SECTION_CLASS, /(^| )h-\[160vh\]( |$)/);
   assert.match(SECTION_CLASS, /motion-reduce:h-auto/);
   assert.match(SECTION_CLASS, /motion-reduce:min-h-/);
 });
