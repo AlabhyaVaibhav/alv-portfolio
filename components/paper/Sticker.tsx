@@ -8,16 +8,16 @@ type StickerProps = {
   className?: string;
 };
 
+// A die-cut sticker: the image carries its own white border and transparent surround, so the
+// shadow follows the cut line rather than a rectangle.
 export function Sticker({ src, alt, width, height, className = "" }: StickerProps) {
   return (
-    <div className={`drop-object ${className}`}>
-      <Image
-        src={src}
-        alt={alt}
-        width={width}
-        height={height}
-        className="w-[48vw] rounded-[28px] border-[7px] border-paper md:w-[min(24vw,340px)]"
-      />
-    </div>
+    <Image
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      className={`h-auto [filter:drop-shadow(0_2px_1px_rgba(0,0,0,0.22))_drop-shadow(0_10px_18px_rgba(0,0,0,0.28))] ${className}`}
+    />
   );
 }

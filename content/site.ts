@@ -1,6 +1,8 @@
 export type SiteContent = {
   name: string;
-  coverLine: string;
+  greeting: string;
+  // The cover headline, one entry per line. The last word is set in italic.
+  headline: string[];
   email: string;
   linkedinUrl: string;
   resumeHref: string;
@@ -10,9 +12,8 @@ export type SiteContent = {
 
 export const site: SiteContent = {
   name: "Alabhya Vaibhav",
-  // TODO(copy)
-  coverLine:
-    "Product manager by day. Photographer, side-project builder and Bailey's driver the rest of the time.",
+  greeting: "Hi, I'm Alabhya",
+  headline: ["An empathetic", "product designer", "who makes AI feel human"],
   email: "alabhya.vaibhav1997@gmail.com",
   linkedinUrl: "https://www.linkedin.com/in/alabhya-vaibhav/",
   resumeHref: "/resume.pdf",
