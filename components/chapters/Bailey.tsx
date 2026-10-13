@@ -4,6 +4,7 @@ import { Scatter, type ScatterItem } from "@/components/mat/Scatter";
 import { MarkerNote } from "@/components/paper/MarkerNote";
 import { Polaroid } from "@/components/paper/Polaroid";
 import { StickyNote } from "@/components/paper/StickyNote";
+import { HamiltonSticker, M340iSticker, ManUtdSticker, OldTraffordSticker } from "@/components/paper/FanStickers";
 import { Ticket } from "@/components/paper/Ticket";
 import { TodoSticky } from "@/components/paper/TodoSticky";
 import { bailey } from "@/content/bailey";
@@ -19,7 +20,7 @@ const PLACES = [
 
 // The rest of the desk.
 const OBJECTS: ScatterItem[] = [
-  { name: "succulent", x: 31, y: 5, rotate: 0, from: "top", mobile: null },
+  { name: "succulent", x: 89, y: 61, rotate: 0, from: "right", mobile: null },
   { name: "chai-cup", x: 88, y: 42, rotate: 0, from: "right", mobile: { x: 4, y: 80 } },
   { name: "glasses-and-watch", x: 73, y: 78, rotate: -6, from: "bottom", mobile: null },
   { name: "tangled-earphones", x: 21, y: 79, rotate: 10, from: "left", mobile: null },
@@ -51,6 +52,19 @@ export function Bailey() {
           <br />
           2 humans · 1 cat
         </Ticket>
+      </Piece>
+      {/* Fan stickers: Manchester United, a trip to Old Trafford, Hamilton at Ferrari, and the car. */}
+      <Piece x={26} y={12} rotate={-8} from="top" enterAt={0.1} mobile={{ x: 70, y: 73, rotate: -8, scale: 0.8 }}>
+        <ManUtdSticker />
+      </Piece>
+      <Piece x={24} y={86} rotate={-3} from="bottom" enterAt={0.12} hideOnMobile className="max-xl:hidden">
+        <OldTraffordSticker />
+      </Piece>
+      <Piece x={37} y={11} rotate={6} from="top" enterAt={0.14} mobile={{ x: 72, y: 83, rotate: 6, scale: 0.8 }}>
+        <HamiltonSticker />
+      </Piece>
+      <Piece x={86} y={25} rotate={-6} from="right" enterAt={0.14} hideOnMobile className="max-xl:hidden">
+        <M340iSticker />
       </Piece>
       <Piece x={8} y={66} rotate={-4} from="left" enterAt={0.15} mobile={{ x: 30, y: 74, rotate: -4, scale: 0.85 }}>
         <StickyNote color="pink">{site.baileyNote}</StickyNote>
