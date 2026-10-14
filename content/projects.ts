@@ -43,13 +43,6 @@ export type Project = {
   page?: CasePage;
 };
 
-// TODO(copy): a real case study per project.
-const PLACEHOLDER_CASE: CaseStudy = {
-  problem: "The messy, complex problem, in a sentence or two.",
-  approach: "What I tried, what I cut, and the call that mattered.",
-  outcome: "What changed for the people using it, ideally with a number.",
-};
-
 // Add, remove, or reorder freely: the Side projects chapter shows them all in a carousel, featured first.
 export const projects: Project[] = [
   {
@@ -100,11 +93,49 @@ export const projects: Project[] = [
     },
   },
   {
-    name: "Fuzzy Trip",
+    name: "FuzzyTrip",
     kind: "client",
-    // TODO(copy): one line on what Fuzzy Trip is and what was built for it.
-    blurb: "Client project. One line on what it is and what I built goes here.",
-    caseStudy: PLACEHOLDER_CASE,
+    blurb:
+      "Group trips stall in the group chat. FuzzyTrip cuts the time from \"we should go somewhere\" to a plan everyone's in on: many voices, one good plan.",
+    caseStudy: {
+      problem: "Group travel stalls on deciding, not booking: dates, budgets and places bounce around the group chat long before anyone commits.",
+      approach: "Shaping the product strategy and roadmap, the design, and how a traveller should feel using it, starting with cutting decision latency for groups.",
+      outcome: "The vision grows from faster group decisions into an end-to-end app that can be tailored into persona-based travel ecosystems.",
+    },
+    // TODO(copy): status, timeline and any early results once they can be shared.
+    page: {
+      eyebrow: "many voices, one good plan",
+      dek: "Helping groups get from \"we should go somewhere\" to a booked trip, without the endless back-and-forth.",
+      tags: ["Travel", "Group decisions"],
+      facts: [{ label: "My role", value: ["Product strategy & roadmap", "Product design", "Consumer experience"] }],
+      sections: [
+        {
+          eyebrow: "The problem",
+          title: "Group trips die in the group chat",
+          body: [
+            "Everyone has an opinion on where, when and how much. The slowest part of group travel isn't the booking, it's the deciding: the gap between a group wanting to go and a group agreeing on a plan.",
+            "That decision latency is what FuzzyTrip sets out to cut.",
+          ],
+        },
+        {
+          eyebrow: "My part",
+          title: "Strategy, design and the traveller's view",
+          steps: [
+            { title: "Strategy & roadmap", text: "Defining what FuzzyTrip solves first, and the order it grows in from there." },
+            { title: "Design", text: "Shaping the product and its flows so a group can land on one plan." },
+            { title: "The consumer lens", text: "How a traveller would actually perceive it, and what makes a whole group trust the plan." },
+          ],
+        },
+        {
+          eyebrow: "The vision",
+          title: "From faster decisions to the whole trip",
+          body: [
+            "Start by solving decision latency for groups. Then extend into an end-to-end app for the whole trip, one that can be tailored into persona-based travel ecosystems.",
+          ],
+        },
+      ],
+      links: [{ label: "Visit fuzzytrip.com", href: "https://fuzzytrip.com" }],
+    },
   },
   {
     name: "How Your City Moves",
