@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Tape } from "@/components/paper/Tape";
 import type { CaseCard, CaseFact, CasePage, Project } from "@/content/projects";
+import { PaperArrival } from "./PaperArrival";
 import { site } from "@/content/site";
 import { projectSlug } from "@/lib/projectPages";
 
@@ -20,6 +21,7 @@ export function CaseStudyPage({ project, previous, next }: CaseStudyPageProps) {
 
   return (
     <div className="relative z-[1] px-3 pb-16 pt-4 md:px-8 md:pt-6">
+      <PaperArrival />
       <nav aria-label="Case study" className="mx-auto flex max-w-[1180px] items-center justify-between gap-3">
         <Link
           href="/#projects"
