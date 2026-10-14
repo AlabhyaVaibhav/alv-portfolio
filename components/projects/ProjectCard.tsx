@@ -73,7 +73,7 @@ export function ProjectCard({ project }: { project: Project }) {
                   animate={{ y: 0 }}
                   exit={{ y: "102%" }}
                   transition={ease}
-                  className="pointer-events-auto absolute inset-0 overflow-y-auto bg-[#fdfcf7] bg-[linear-gradient(transparent_27px,rgba(80,110,160,0.16)_28px)] bg-[length:100%_28px] px-5 pb-5 pt-9 text-ink md:px-7 md:pt-11"
+                  className="pointer-events-auto absolute inset-0 overflow-y-auto overscroll-contain bg-[#fdfcf7] bg-[linear-gradient(transparent_21px,rgba(80,110,160,0.16)_22px)] bg-[length:100%_22px] px-5 pb-2 pt-7 text-ink md:bg-[linear-gradient(transparent_27px,rgba(80,110,160,0.16)_28px)] md:bg-[length:100%_28px] md:px-7 md:pb-5 md:pt-11"
                 >
                   <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-ink/55">case study · {name}</p>
                   {(
@@ -83,11 +83,14 @@ export function ProjectCard({ project }: { project: Project }) {
                       ["what changed", caseStudy.outcome],
                     ] as const
                   ).map(([label, text]) => (
-                    <div key={label} className="mt-3 md:mt-4">
-                      <p className="font-hand text-2xl leading-none text-[#c2502c]">{label}</p>
-                      <p className="mt-1 font-mono text-[11px] leading-[28px] md:text-[12.5px]">{text}</p>
+                    <div key={label} className="mt-2 md:mt-4">
+                      <p className="font-hand text-xl leading-none text-[#c2502c] md:text-2xl">{label}</p>
+                      <p className="mt-1 font-mono text-[11px] leading-[22px] md:text-[12.5px] md:leading-[28px]">{text}</p>
                     </div>
                   ))}
+                  {/* Phones: the sheet can be taller than the card, so a fade pinned to the bottom edge
+                      shows there's more to scroll to. At the end it sits below the text. */}
+                  <div aria-hidden className="pointer-events-none sticky bottom-0 -mx-5 h-8 bg-gradient-to-t from-[#fdfcf7] to-transparent md:hidden" />
                 </motion.div>
               )}
             </AnimatePresence>

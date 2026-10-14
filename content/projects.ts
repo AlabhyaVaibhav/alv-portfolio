@@ -28,9 +28,17 @@ export const projects: Project[] = [
     kind: "internal",
     featured: true,
     blurb:
-      "A companion that draws out the stories your photos have been holding, then turns them into keepsakes worth sharing: a comic strip, a junk journal, a Polaroid.",
-    note: "launching now",
-    caseStudy: PLACEHOLDER_CASE,
+      "Your camera roll is full of stories nobody has heard. Twine's companion talks you through a moment, then weaves it into a keepsake you share privately with the people who were there.",
+    note: "in beta",
+    // From the Twine page on amarshvutukuri.com/labs/twine, rewritten in this site's voice.
+    // TODO(copy): add your role on Twine, and a link once there's a public one (beta is TestFlight-only).
+    caseStudy: {
+      problem:
+        "Camera rolls overflow, social feels like a performance, and close friends drift. The story behind a moment rarely reaches the people who were in it.",
+      approach:
+        "A short chat with a companion pulls the story out in your own voice. Pick a style, comic or doodle, and share it privately: one person, a circle, or a group.",
+      outcome: "In beta on TestFlight. Private sharing is still in the works.",
+    },
   },
   {
     name: "Fuzzy Trip",
