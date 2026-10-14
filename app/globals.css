@@ -11,6 +11,7 @@
   --color-sticky-yellow: #f6d77a;
   --color-sticky-pink: #f2b8a2;
   --font-display: var(--font-instrument-serif);
+  --font-body: var(--font-instrument-sans);
   --font-mono: var(--font-jetbrains-mono);
   --font-hand: var(--font-caveat);
 }

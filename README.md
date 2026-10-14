@@ -19,14 +19,14 @@ As you scroll, each chapter's paper slides onto the mat, holds while you read, a
 | 00 | Cover | The headline, written onto the mat in ink, and a welcome note on how to use the desk |
 | 01 | Day job | Itron (worker safety, SDLC to AIDLC), then a CommerceIQ receipt, a Soroco process map and a Quikr Jobs classifieds clipping |
 | 02 | Behind the camera | 54 photos in three piles: places, people & streets, Bailey |
-| 03 | Side projects | A carousel of projects and writing; unclip a card's binder clip for its case study |
+| 03 | Side projects | A carousel of projects and writing; unclip a card's binder clip for a quick case study, or open the full one |
 | 04 | Off the clock | Bailey, a to-do list you can tick, and fan stickers |
 | 05 | Say hi | Contact, resume, and me & Bailey as a sticker |
 
 ## Things you can do
 
 - **Drag and peel the sticky notes** (with a mouse or trackpad)
-- **Unclip a project's binder clip** to slide out its case study
+- **Unclip a project's binder clip** to slide out its case study, or open the full case study at `/projects/<name>`
 - **Tick the to-do list**: each item gets a check and a pen stroke through it
 - **Open any photo** and flip through its pile
 - **Grab the resume** from the yellow button in the corner of every chapter
@@ -57,7 +57,7 @@ If the dev server keeps showing old styles after you edit `app/globals.css`, sto
 
 | Path | What it holds |
 |---|---|
-| `content/` | All the copy and data: `site.ts` (headline, contact, notes), `work.ts`, `projects.ts`, `photography.ts`, `bailey.ts`, `objects.ts` |
+| `content/` | All the copy and data: `site.ts` (headline, contact, notes), `work.ts`, `projects.ts` (including each case-study page), `photography.ts`, `bailey.ts`, `objects.ts` |
 | `components/chapters/` | One file per chapter, placing its pieces on the mat |
 | `components/paper/` | The stationery: sticky notes, cards, receipt, clipping, stickers, chalk and pen strokes |
 | `components/mat/` | The mat, the scroll engine (`Chapter`, `Piece`), the chapter menu |

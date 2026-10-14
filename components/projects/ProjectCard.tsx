@@ -2,16 +2,19 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePrefersReducedMotion } from "@/components/mat/usePrefersReducedMotion";
 import { BinderClip } from "@/components/paper/BinderClip";
 import { Squiggle } from "@/components/paper/Squiggle";
 import type { Project } from "@/content/projects";
+import { projectSlug } from "@/lib/projectPages";
 
 const KIND_LABEL: Record<Project["kind"], string> = { client: "Client", internal: "Internal", writing: "Article" };
 
 export function ProjectCard({ project }: { project: Project }) {
-  const { name, kind, blurb, link, image, note, caseStudy } = project;
+  const { name, kind, blurb, link, image, note, caseStudy, page } = project;
+  const pageHref = page ? `/projects/${projectSlug(name)}` : null;
   const [open, setOpen] = useState(false);
   const still = usePrefersReducedMotion();
   const ease = { duration: still ? 0 : 0.4, ease: [0.33, 1, 0.68, 1] as const };
@@ -44,7 +47,15 @@ export function ProjectCard({ project }: { project: Project }) {
       </div>
       <h3 className="mt-4 font-display text-3xl italic leading-tight text-ink md:mt-5 md:text-4xl">{name}</h3>
       <p className="mt-2 font-mono text-[11px] leading-relaxed text-ink/80 md:text-[12.5px]">{blurb}</p>
-      {link ? (
+      {pageHref ? (
+        <Link
+          href={pageHref}
+          className="group relative mt-auto self-start pt-4 font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-ink md:pt-5 md:text-xs"
+        >
+          Read the case study →
+          <Squiggle />
+        </Link>
+      ) : link ? (
         <a
           href={link}
           target="_blank"
@@ -88,6 +99,11 @@ export function ProjectCard({ project }: { project: Project }) {
                       <p className="mt-1 font-mono text-[11px] leading-[22px] md:text-[12.5px] md:leading-[28px]">{text}</p>
                     </div>
                   ))}
+                  {pageHref && (
+                    <Link href={pageHref} className="group relative mt-4 inline-block font-hand text-2xl leading-none text-[#c2502c]">
+                      read the full story →
+                    </Link>
+                  )}
                   {/* Phones: the sheet can be taller than the card, so a fade pinned to the bottom edge
                       shows there's more to scroll to. At the end it sits below the text. */}
                   <div aria-hidden className="pointer-events-none sticky bottom-0 -mx-5 h-8 bg-gradient-to-t from-[#fdfcf7] to-transparent md:hidden" />
