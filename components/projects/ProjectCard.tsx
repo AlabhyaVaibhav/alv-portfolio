@@ -13,7 +13,7 @@ import { projectSlug } from "@/lib/projectPages";
 const KIND_LABEL: Record<Project["kind"], string> = { client: "Client", internal: "Internal", writing: "Article" };
 
 export function ProjectCard({ project }: { project: Project }) {
-  const { name, kind, blurb, link, image, note, caseStudy, page } = project;
+  const { name, kind, blurb, link, image, imageBg, note, caseStudy, page } = project;
   const pageHref = page ? `/projects/${projectSlug(name)}` : null;
   const [open, setOpen] = useState(false);
   const still = usePrefersReducedMotion();
@@ -26,7 +26,14 @@ export function ProjectCard({ project }: { project: Project }) {
     >
       <div className="relative aspect-[16/10] max-h-[30vh] w-full overflow-hidden rounded-[12px] bg-[#ecebe6] md:rounded-[14px]">
         {image ? (
-          <Image src={image} alt={`${name} screenshot`} fill sizes="(min-width: 768px) 480px, 74vw" className="object-cover" />
+          <Image
+            src={image}
+            alt={`${name} cover`}
+            fill
+            sizes="(min-width: 768px) 480px, 74vw"
+            className={imageBg ? "object-contain" : "object-cover"}
+            style={imageBg ? { backgroundColor: imageBg } : undefined}
+          />
         ) : (
           <span
             role="img"

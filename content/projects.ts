@@ -32,8 +32,12 @@ export type Project = {
   kind: "client" | "internal" | "writing";
   blurb: string;
   link?: string;
-  // Screenshot for the card, e.g. "/projects/twine.png" (file in public/projects/). Hatched placeholder until set.
+  // Cover for the card and the case-study hero, e.g. "/projects/twine.webp" (file in public/projects/).
+  // Hatched placeholder until set.
   image?: string;
+  // For covers much wider than the card: show the whole image, letterboxed on this colour, instead of
+  // cropping it.
+  imageBg?: string;
   featured?: boolean;
   // Short handwritten sticky note attached to the card.
   note?: string;
@@ -95,19 +99,26 @@ export const projects: Project[] = [
   {
     name: "FuzzyTrip",
     kind: "client",
+    image: "/projects/fuzzytrip.webp",
+    imageBg: "#0c1a31",
+    note: "in development",
     blurb:
-      "Group trips stall in the group chat. FuzzyTrip cuts the time from \"we should go somewhere\" to a plan everyone's in on: many voices, one good plan.",
+      "Group trips stall in the group chat. In FuzzyTrip one organiser plans, everyone else weighs in over WhatsApp, and the group lands on one good plan.",
     caseStudy: {
       problem: "Group travel stalls on deciding, not booking: dates, budgets and places bounce around the group chat long before anyone commits.",
-      approach: "Shaping the product strategy and roadmap, the design, and how a traveller should feel using it, starting with cutting decision latency for groups.",
+      approach: "Shaping the product strategy and roadmap, the design, and how a traveller should feel using it. One organiser plans; everyone else answers in WhatsApp; nobody books until the plan is set.",
       outcome: "The vision grows from faster group decisions into an end-to-end app that can be tailored into persona-based travel ecosystems.",
     },
-    // TODO(copy): status, timeline and any early results once they can be shared.
+    // TODO(copy): timeline and any early results once they can be shared.
     page: {
-      eyebrow: "many voices, one good plan",
-      dek: "Helping groups get from \"we should go somewhere\" to a booked trip, without the endless back-and-forth.",
+      eyebrow: "group trips, finally decided",
+      dek: "One organiser plans in FuzzyTrip while everyone else weighs in through Wonderlog, in a private WhatsApp chat. The group shapes one plan together, and nothing gets booked until the organiser says go.",
       tags: ["Travel", "Group decisions"],
-      facts: [{ label: "My role", value: ["Product strategy & roadmap", "Product design", "Consumer experience"] }],
+      hero: "/projects/fuzzytrip.webp",
+      facts: [
+        { label: "Status", value: "Under development" },
+        { label: "My role", value: ["Product strategy & roadmap", "Product design", "Consumer experience"] },
+      ],
       sections: [
         {
           eyebrow: "The problem",
@@ -115,6 +126,15 @@ export const projects: Project[] = [
           body: [
             "Everyone has an opinion on where, when and how much. The slowest part of group travel isn't the booking, it's the deciding: the gap between a group wanting to go and a group agreeing on a plan.",
             "That decision latency is what FuzzyTrip sets out to cut.",
+          ],
+        },
+        {
+          eyebrow: "How it works",
+          title: "Many voices, one good plan",
+          steps: [
+            { title: "One organiser plans", text: "The organiser sets the trip up in FuzzyTrip." },
+            { title: "Everyone weighs in", text: "The rest of the group answers Wonderlog in a private WhatsApp chat, with no new app to install." },
+            { title: "Book once it's decided", text: "Together they shape one plan, and nobody books anything until the organiser does." },
           ],
         },
         {
@@ -140,6 +160,8 @@ export const projects: Project[] = [
   {
     name: "How Your City Moves",
     kind: "internal",
+    image: "/projects/how-your-city-moves.webp",
+    note: "live",
     blurb:
       "A dot-matrix look at how people commute across nine cities. Your commute stays in your browser: no accounts, and city stats are opt-in and anonymous.",
     link: "https://www.howyourcitymoves.fyi",
@@ -153,6 +175,7 @@ export const projects: Project[] = [
       eyebrow: "a dot-matrix look at commutes",
       dek: "See how people get around nine cities, and add your own commute without giving anything away.",
       tags: ["Data viz", "Privacy-first"],
+      hero: "/projects/how-your-city-moves.webp",
       facts: [
         { label: "Status", value: "Live", live: true },
         { label: "Coverage", value: "Nine cities" },
@@ -163,6 +186,13 @@ export const projects: Project[] = [
           title: "A city, drawn in dots",
           body: [
             "Commutes shape a city as much as its roads do, but they're invisible from the outside. How Your City Moves draws them as a dot-matrix map, so you can see where people come from and where they're headed.",
+          ],
+        },
+        {
+          eyebrow: "My own commute",
+          title: "480 hours a year on the road",
+          body: [
+            "My card: HSR Layout to Indiranagar, an hour each way by car. That adds up to 480 hours a year, about 20 days, or roughly 16 Test matches start to finish.",
           ],
         },
         {
@@ -180,20 +210,26 @@ export const projects: Project[] = [
   {
     name: "IPL Prediction League",
     kind: "internal",
+    image: "/projects/ipl-prediction-league.webp",
+    imageBg: "#0c1117",
+    note: "live",
+    // TODO(copy): confirm the community is Dugout Dost (from the cover).
     blurb:
-      "A prediction league for a YouTube community: daily match picks, season-long picks, a live schedule and a real-time leaderboard. React, Firebase.",
+      "A prediction league for the Dugout Dost YouTube community: daily match picks, season-long picks, a live schedule and a real-time leaderboard. React, Firebase.",
     caseStudy: {
       problem: "A YouTube community needed one place to call IPL matches and keep score across the season.",
       approach: "Daily match picks, season-long picks, an IPL schedule feed, a real-time leaderboard and an admin panel to settle results.",
-      outcome: "Built in March 2026 for the IPL season.",
+      outcome: "Built in March 2026 and live for the IPL season.",
     },
     // TODO(copy): the community, how many played, and what you learned.
     page: {
       eyebrow: "a prediction league",
-      dek: "A league for a YouTube community to call every IPL match, with a leaderboard that updates as results come in.",
+      dek: "A league for the Dugout Dost YouTube community to call every IPL match, with a leaderboard that updates as results come in.",
       tags: ["Community", "Sports"],
+      hero: "/projects/ipl-prediction-league.webp",
       facts: [
-        { label: "Status", value: "Shipped", live: true },
+        { label: "Status", value: "Live", live: true },
+        { label: "Community", value: "Dugout Dost" },
         { label: "When", value: "Mar 2026" },
         { label: "Tools", value: ["React 19", "TypeScript", "Tailwind CSS 4", "Framer Motion", "Firebase", "Vite 6", "React Router 7"] },
       ],
@@ -217,7 +253,7 @@ export const projects: Project[] = [
           ],
         },
       ],
-      outcome: { title: "Shipped for the season", text: "Built in March 2026 for the IPL season." },
+      outcome: { title: "Live for the season", text: "Built in March 2026 and live for the IPL season." },
     },
   },
   {

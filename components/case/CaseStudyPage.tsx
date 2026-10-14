@@ -50,7 +50,7 @@ export function CaseStudyPage({ project, previous, next }: CaseStudyPageProps) {
           </aside>
 
           <div className="min-w-0">
-            <Hero src={page.hero} name={project.name} />
+            <Hero src={page.hero} bg={project.imageBg} name={project.name} />
             <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60 md:mt-12 md:text-[12px]">{page.eyebrow}</p>
             <h1 className="mt-2 font-display text-[46px] leading-[0.95] tracking-[-0.01em] md:text-[76px]">{project.name}</h1>
             <p className="mt-4 max-w-[60ch] text-[18px] leading-relaxed text-ink/75 md:text-[21px]">{page.dek}</p>
@@ -161,11 +161,19 @@ function Fact({ fact }: { fact: CaseFact }) {
   );
 }
 
-function Hero({ src, name }: { src?: string; name: string }) {
+function Hero({ src, bg, name }: { src?: string; bg?: string; name: string }) {
   return (
     <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[16px] bg-[#ecebe6] md:rounded-[22px]">
       {src ? (
-        <Image src={src} alt={`${name}`} fill sizes="(min-width: 768px) 800px, 100vw" className="object-cover" priority />
+        <Image
+          src={src}
+          alt={`${name} cover`}
+          fill
+          sizes="(min-width: 768px) 800px, 100vw"
+          className={bg ? "object-contain" : "object-cover"}
+          style={bg ? { backgroundColor: bg } : undefined}
+          priority
+        />
       ) : (
         <span
           role="img"
