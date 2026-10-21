@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- A yellow sticky note with a red pen squiggle, on the green cutting mat. -->
+  <rect width="64" height="64" rx="14" fill="#253e39"/>
+  <path d="M0 21.5H64M0 42.5H64M21.5 0V64M42.5 0V64" stroke="#f3efe2" stroke-opacity=".14" stroke-width="1"/>
+  <g transform="rotate(-8 32 32)">
+    <path d="M13 13H51V41L41 51H13Z" fill="#f6d77a"/>
+    <path d="M41 51V43.5C41 42.1 42.1 41 43.5 41H51Z" fill="#d9b55a"/>
+    <path d="M19 27C23 22 26 32 30 27S37 22 41 27S45 31 46 28" fill="none" stroke="#e23b2e" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M19 37H33" stroke="#2b2620" stroke-opacity=".55" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>
