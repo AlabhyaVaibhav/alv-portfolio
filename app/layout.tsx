@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Caveat, Instrument_Sans, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import { Mat } from "@/components/mat/Mat";
 import "./globals.css";
@@ -39,6 +40,7 @@ export default function RootLayout({
       <body className="bg-grain font-mono text-cream antialiased">
         <Mat />
         {children}
+        <Analytics />
       </body>
     </html>
   );

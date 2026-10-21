@@ -12,6 +12,7 @@
     "resume": "'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --no-pdf-header-footer --print-to-pdf=public/resume.pdf docs/resume/resume.html"
   },
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
     "framer-motion": "^12.42.2",
     "next": "16.2.9",
     "react": "19.2.4",
