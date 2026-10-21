@@ -27,9 +27,22 @@ const hand = Caveat({
   subsets: ["latin"],
 });
 
+const description = "Product manager at Itron. Photographer, side-project builder, and Bailey's driver.";
+
+// The share card itself is app/opengraph-image.png (and twitter-image.png); without one, link previews
+// picked the first image on the page, a company logo.
 export const metadata: Metadata = {
+  metadataBase: new URL("https://offmydesk.lol"),
   title: "Alabhya Vaibhav",
-  description: "Product manager at Itron. Photographer, side-project builder, and Bailey's driver.",
+  description,
+  openGraph: {
+    title: "Alabhya Vaibhav · off my desk",
+    description,
+    url: "/",
+    siteName: "off my desk",
+    type: "website",
+  },
+  twitter: { card: "summary_large_image", title: "Alabhya Vaibhav · off my desk", description },
 };
 
 export default function RootLayout({
