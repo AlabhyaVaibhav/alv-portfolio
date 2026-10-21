@@ -48,7 +48,6 @@ export const workHistory: Company[] = [
     name: "CommerceIQ",
     location: "Bengaluru",
     focus: "e-commerce analytics",
-    // TODO(copy): confirm the leaving month (joined Itron 6 Apr 2026).
     years: "2021–26",
     highlights: [
       { title: "Ally · AI Insights", metric: "New ARR + GDR", line: "Omni-channel AI recommendations surfaced inside the platform." },
@@ -59,7 +58,7 @@ export const workHistory: Company[] = [
     positions: [
       {
         title: "Product Manager, Platform",
-        dates: "Mar 2023 – Mar 2026",
+        dates: "Mar 2023 – Apr 2026",
         bullets: [
           "Led development of the Omni Channel AI Insights Platform (Ally), driving new ARR growth and strengthening GDR positioning by surfacing AI-driven recommendations",
           "Launched a cross-product reporting platform with automated decks, reducing manual reporting effort by 79% — leading to ~$500K annual savings and enabling CSMs to focus on strategic customer engagements",
