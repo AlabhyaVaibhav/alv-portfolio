@@ -6,13 +6,21 @@ import { AnimatePresence, motion } from "framer-motion";
 import { usePrefersReducedMotion } from "@/components/mat/usePrefersReducedMotion";
 import { FolderLink } from "@/components/case/FolderLink";
 import { BinderClip } from "@/components/paper/BinderClip";
+import { ChalkOutline } from "@/components/paper/ChalkOutline";
 import { Squiggle } from "@/components/paper/Squiggle";
 import type { Project } from "@/content/projects";
 import { projectSlug } from "@/lib/projectPages";
 
 const KIND_LABEL: Record<Project["kind"], string> = { client: "Client", internal: "Internal", writing: "Article" };
 
-export function ProjectCard({ project }: { project: Project }) {
+type ProjectCardProps = {
+  project: Project;
+  // Ring the clip in red pen with a note saying what it does. Only one card at a time gets it.
+  hint?: boolean;
+  onUnclip?: () => void;
+};
+
+export function ProjectCard({ project, hint = false, onUnclip }: ProjectCardProps) {
   const { name, kind, blurb, link, image, imageBg, note, caseStudy, page } = project;
   const pageHref = page ? `/projects/${projectSlug(name)}` : null;
   const [open, setOpen] = useState(false);
@@ -125,7 +133,10 @@ export function ProjectCard({ project }: { project: Project }) {
             aria-expanded={open}
             aria-controls={`case-${name}`}
             aria-label={open ? `Clip the ${name} case study back` : `Unclip to read the ${name} case study`}
-            onClick={() => setOpen((o) => !o)}
+            onClick={() => {
+              setOpen((o) => !o);
+              onUnclip?.();
+            }}
             className="group absolute -top-[18px] left-1/2 z-10 -translate-x-1/2 md:-top-[22px]"
           >
             <motion.span
@@ -135,9 +146,19 @@ export function ProjectCard({ project }: { project: Project }) {
             >
               <BinderClip className="h-[34px] w-[48px] drop-shadow-[0_3px_3px_rgba(0,0,0,0.3)] transition-transform group-hover:-translate-y-0.5 md:h-[42px] md:w-[60px]" />
             </motion.span>
-            <span className="pointer-events-none absolute left-full top-1 ml-1 whitespace-nowrap font-hand text-lg leading-none text-ink/70 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
-              {open ? "clip it back" : "unclip"}
-            </span>
+            {!hint ? (
+              <span className="pointer-events-none absolute left-full top-1 ml-1 whitespace-nowrap font-hand text-lg leading-none text-ink/70 opacity-0 transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+                {open ? "clip it back" : "unclip"}
+              </span>
+            ) : (
+              <>
+                <ChalkOutline color="#e0623a" delay={0.6} className="!-inset-x-3 !-inset-y-1.5 !h-[calc(100%+0.75rem)] !w-[calc(100%+1.5rem)] md:!-inset-x-3.5 md:!-inset-y-2 md:!h-[calc(100%+1rem)] md:!w-[calc(100%+1.75rem)]" />
+                <span className="pointer-events-none absolute left-full top-0 ml-4 whitespace-nowrap font-hand text-lg leading-none text-[#c2502c] md:ml-5 md:text-xl">
+                  <span className="md:hidden">← unclip me</span>
+                  <span className="hidden md:inline">← unclip for a summary</span>
+                </span>
+              </>
+            )}
           </button>
         </>
       )}
