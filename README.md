@@ -1,12 +1,12 @@
 <p align="center">
-  <a href="https://alv-portfolio.vercel.app">
+  <a href="https://offmydesk.lol">
     <img src="docs/readme-banner.jpg" alt="The cover of the portfolio: a green cutting mat with sticky notes, a notebook, pens and a binder clip around the line 'i solve complex problems and make the answer feel simple.'" width="100%" />
   </a>
 </p>
 
 # Alabhya Vaibhav: portfolio
 
-**Live:** [alv-portfolio.vercel.app](https://alv-portfolio.vercel.app)
+**Live:** [offmydesk.lol](https://offmydesk.lol)
 
 My portfolio, laid out like a desk: a self-healing cutting mat with work and life scattered across it. I'm a product manager at Itron, working on worker safety and on moving the team from SDLC to AIDLC. The site covers that work, the jobs before it, the things I build on the side, photography, and Bailey (the cat).
 
