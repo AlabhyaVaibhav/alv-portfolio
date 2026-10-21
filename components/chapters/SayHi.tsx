@@ -1,6 +1,8 @@
 import { Chapter } from "@/components/mat/Chapter";
 import { Piece } from "@/components/mat/Piece";
 import { Scatter, type ScatterItem } from "@/components/mat/Scatter";
+import { StickerScatter, place } from "@/components/mat/StickerScatter";
+import { aiTools, competencies } from "@/content/skills";
 import { MarkerNote } from "@/components/paper/MarkerNote";
 import { Squiggle } from "@/components/paper/Squiggle";
 import { ResumeTag } from "@/components/paper/ResumeTag";
@@ -9,13 +11,31 @@ import { TornStrip } from "@/components/paper/TornStrip";
 import { chapters } from "@/content/chapters";
 import { site } from "@/content/site";
 
-// Things you'd send or pin up. The laptop photo is only a corner of the lid, cut off along the image's
-// top and left edges: it's turned round so those cuts run off the bottom-right of the screen.
+// The laptop photo is only a corner of the lid, cut off along the image's top and left edges: it's
+// turned round so those cuts run off the bottom-right of the screen.
 const OBJECTS: ScatterItem[] = [
-  { name: "postcard", x: 50, y: 42, rotate: -6, from: "bottom", mobile: null },
   { name: "laptop-corner", x: 82, y: 78, rotate: 184, from: "right", mobile: null },
-  { name: "washi-masking-tape", x: 35, y: 35, rotate: -8, from: "bottom", mobile: null },
 ];
+
+// The AI tools he builds with, in the open middle of the mat, and the resume's core competencies as
+// kraft labels in the bottom-left. Phones get three AI stickers beside the heading; tablets, where
+// the middle of the mat is narrower, skip both.
+const AI_STICKERS = place(aiTools, [
+  { x: 42, y: 42, rotate: -5, mobile: { x: 68, y: 9 }, className: "md:max-xl:hidden" },
+  { x: 55, y: 39, rotate: 4, mobile: { x: 64, y: 16 }, className: "md:max-xl:hidden" },
+  { x: 66, y: 45, rotate: -3, mobile: { x: 73, y: 22 }, className: "md:max-xl:hidden" },
+  { x: 46, y: 53, rotate: 6, mobile: null, className: "md:max-xl:hidden" },
+  { x: 59, y: 56, rotate: -4, mobile: null, className: "md:max-xl:hidden" },
+]);
+
+const SKILL_LABELS = place(competencies, [
+  { x: 3, y: 70, rotate: -3, mobile: null, className: "md:max-xl:hidden" },
+  { x: 22, y: 72, rotate: 2, mobile: null, className: "md:max-xl:hidden" },
+  { x: 4, y: 78, rotate: 2, mobile: null, className: "md:max-xl:hidden" },
+  { x: 19, y: 80, rotate: -2, mobile: null, className: "md:max-xl:hidden" },
+  { x: 6, y: 86, rotate: -1, mobile: null, className: "md:max-xl:hidden" },
+  { x: 19, y: 89, rotate: 3, mobile: null, className: "md:max-xl:hidden" },
+]);
 
 export function SayHi() {
   return (
@@ -68,6 +88,11 @@ export function SayHi() {
       <Piece x={80} y={68} rotate={-4} from="bottom" enterAt={0.16} hideOnMobile className="max-lg:hidden">
         <MarkerNote arrow="up">me &amp; Bailey</MarkerNote>
       </Piece>
+      <Piece x={42} y={33} rotate={-2} from="top" enterAt={0.12} hideOnMobile className="max-xl:hidden">
+        <MarkerNote arrow="down">my AI toolkit</MarkerNote>
+      </Piece>
+      <StickerScatter stickers={AI_STICKERS} />
+      <StickerScatter stickers={SKILL_LABELS} from="left" enterAt={0.15} />
     </Chapter>
   );
 }

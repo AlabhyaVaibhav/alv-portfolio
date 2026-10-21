@@ -4,18 +4,22 @@ import { useId, type CSSProperties } from "react";
 
 // One loose loop around a box, overshooting where it closes, as if circled by hand.
 const LOOP = "M10 5 C 35 0, 72 -1, 95 5 C 101 30, 101 70, 96 95 C 70 101, 30 101, 5 96 C -1 70, -1 32, 4 9 C 6 3, 18 1, 34 2";
+// Two fast, wobbly passes that don't quite line up: an urgent scribble rather than a neat loop.
+const SCRIBBLE =
+  "M8 7 C 30 1, 60 3, 96 5 C 100 28, 97 62, 98 94 C 70 99, 35 97, 4 96 C 0 70, 3 35, 3 9 C 20 2, 50 -2, 70 2 M 14 2 C 45 -1, 80 1, 101 9 C 103 40, 101 72, 94 99 C 60 102, 28 101, 1 92 C -3 64, 0 30, 7 4";
 
 type ChalkOutlineProps = {
   // Seconds before the loop starts drawing itself.
   delay?: number;
   // Chalk colour: white by default; orange or yellow to call something out.
   color?: string;
+  scribble?: boolean;
   className?: string;
 };
 
 // A chalky marker loop around its parent (which needs `relative`). Drawn with a pen-draw animation and
 // a rough edge so it reads as hand-drawn on the mat, not a CSS border.
-export function ChalkOutline({ delay = 0, color = "#fbf7ea", className = "" }: ChalkOutlineProps) {
+export function ChalkOutline({ delay = 0, color = "#fbf7ea", scribble = false, className = "" }: ChalkOutlineProps) {
   // A per-instance filter id: a shared one can resolve to a copy inside a hidden element, which
   // Chrome won't render, taking the outline with it.
   const filterId = `chalk-${useId().replace(/[^a-zA-Z0-9]/g, "")}`;
@@ -32,7 +36,7 @@ export function ChalkOutline({ delay = 0, color = "#fbf7ea", className = "" }: C
         </filter>
       </defs>
       <path
-        d={LOOP}
+        d={scribble ? SCRIBBLE : LOOP}
         pathLength={1}
         fill="none"
         stroke={color}
@@ -41,7 +45,7 @@ export function ChalkOutline({ delay = 0, color = "#fbf7ea", className = "" }: C
         strokeLinejoin="round"
         filter={`url(#${filterId})`}
         className="pen-draw"
-        style={{ "--ink-delay": `${delay}s`, "--ink-dur": "0.9s" } as CSSProperties}
+        style={{ "--ink-delay": `${delay}s`, "--ink-dur": scribble ? "0.7s" : "0.9s" } as CSSProperties}
       />
     </svg>
   );

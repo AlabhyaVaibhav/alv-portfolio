@@ -1,5 +1,7 @@
 import { Chapter } from "@/components/mat/Chapter";
 import { Piece } from "@/components/mat/Piece";
+import { StickerScatter, place } from "@/components/mat/StickerScatter";
+import { workTools } from "@/content/skills";
 import { Scatter, type ScatterItem } from "@/components/mat/Scatter";
 import { MarkerNote } from "@/components/paper/MarkerNote";
 import { Polaroid } from "@/components/paper/Polaroid";
@@ -20,11 +22,19 @@ const PLACES = [
 
 // The rest of the desk.
 const OBJECTS: ScatterItem[] = [
-  { name: "succulent", x: 89, y: 61, rotate: 0, from: "right", mobile: null },
   { name: "chai-cup", x: 88, y: 42, rotate: 0, from: "right", mobile: { x: 4, y: 80 } },
   { name: "glasses-and-watch", x: 73, y: 78, rotate: -6, from: "bottom", mobile: null },
-  { name: "tangled-earphones", x: 21, y: 79, rotate: 10, from: "left", mobile: null },
 ];
+
+// The tools of the day job, stuck down the right edge and along the top. Wide screens only: phones
+// and tablets have no room left on this desk.
+const TOOL_STICKERS = place(workTools, [
+  { x: 89, y: 54, rotate: -8, mobile: null, className: "max-xl:hidden" },
+  { x: 89, y: 65, rotate: 4, mobile: null, className: "max-xl:hidden" },
+  { x: 88, y: 75, rotate: -3, mobile: null, className: "max-xl:hidden" },
+  { x: 56, y: 3, rotate: 5, mobile: null, className: "max-xl:hidden" },
+  { x: 67, y: 4, rotate: -6, mobile: null, className: "max-xl:hidden" },
+]);
 
 export function Bailey() {
   return (
@@ -75,6 +85,7 @@ export function Bailey() {
       <Piece x={48} y={80} rotate={-2} from="bottom" enterAt={0.18} hideOnMobile>
         <MarkerNote arrow="left">the other half of the job</MarkerNote>
       </Piece>
+      <StickerScatter stickers={TOOL_STICKERS} from="right" />
     </Chapter>
   );
 }

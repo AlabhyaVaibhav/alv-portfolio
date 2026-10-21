@@ -1,28 +1,18 @@
 import type { ReactNode } from "react";
-import Image from "next/image";
+import { ImageSticker, STICKER_LIFT } from "./ImageSticker";
 
 // Fan stickers. The crest, the Hamilton sticker and the car are images Alabhya supplied, cut out with
 // a white die-cut border (public/stickers/); the Old Trafford stub is drawn here. Each lifts slightly
 // on hover like a sticker coming unstuck.
-const LIFT = "transition-transform duration-300 hover:-translate-y-0.5 hover:-rotate-2";
-const SHADOW = "[filter:drop-shadow(0_1px_1px_rgba(0,0,0,0.25))_drop-shadow(0_6px_10px_rgba(0,0,0,0.3))]";
 
 function Shell({ label, children, round = false }: { label: string; children: ReactNode; round?: boolean }) {
   return (
     <div
       role="img"
       aria-label={label}
-      className={`bg-white p-[5px] shadow-[0_1px_1px_rgba(0,0,0,0.25),0_6px_12px_rgba(0,0,0,0.3)] ${LIFT} ${round ? "rounded-full" : "rounded-[12px]"}`}
+      className={`bg-white p-[5px] shadow-[0_1px_1px_rgba(0,0,0,0.25),0_6px_12px_rgba(0,0,0,0.3)] ${STICKER_LIFT} ${round ? "rounded-full" : "rounded-[12px]"}`}
     >
       {children}
-    </div>
-  );
-}
-
-function ImageSticker({ src, alt, width, height, className }: { src: string; alt: string; width: number; height: number; className: string }) {
-  return (
-    <div className={LIFT}>
-      <Image src={src} alt={alt} width={width} height={height} draggable={false} className={`h-auto select-none ${SHADOW} ${className}`} />
     </div>
   );
 }

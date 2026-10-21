@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { usePrefersReducedMotion } from "@/components/mat/usePrefersReducedMotion";
 import { ChalkOutline } from "@/components/paper/ChalkOutline";
 import { Tape } from "@/components/paper/Tape";
@@ -8,12 +8,36 @@ import type { Project } from "@/content/projects";
 import { carouselEdges } from "@/lib/carousel";
 import { ProjectCard } from "./ProjectCard";
 
+const HINT_KEY = "unclip-hint-seen";
+
+const noSubscribe = () => () => {};
+
+function hintUnseen() {
+  try {
+    return !localStorage.getItem(HINT_KEY);
+  } catch {
+    return true;
+  }
+}
+
 // A sheet of graph paper holding a sideways-scrolling row of project cards. Swipe or trackpad
 // scrolls it directly; the arrows step one card. Vertical scroll still drives the page.
 export function ProjectCarousel({ projects }: { projects: Project[] }) {
   const ref = useRef<HTMLDivElement>(null);
   const still = usePrefersReducedMotion();
   const [edges, setEdges] = useState({ atStart: true, atEnd: false });
+  // The "unclip for a summary" hint shows on the first card until any clip has been opened, once per
+  // browser. The server render leaves it off so a returning visitor never sees it flash.
+  const unseen = useSyncExternalStore(noSubscribe, hintUnseen, () => false);
+  const [dismissed, setDismissed] = useState(false);
+  const hint = unseen && !dismissed;
+
+  const unclipped = () => {
+    setDismissed(true);
+    try {
+      localStorage.setItem(HINT_KEY, "1");
+    } catch {}
+  };
 
   const update = useCallback(() => {
     if (ref.current) setEdges(carouselEdges(ref.current));
@@ -39,6 +63,7 @@ export function ProjectCarousel({ projects }: { projects: Project[] }) {
     el.scrollTo({ left, behavior: still ? "auto" : "smooth" });
   };
 
+  const firstClipped = projects.findIndex((p) => p.caseStudy);
   const scrollable = !(edges.atStart && edges.atEnd);
   // Always opaque: a see-through disabled button let the sheet edge and grid show through it.
   const arrow =
@@ -54,10 +79,10 @@ export function ProjectCarousel({ projects }: { projects: Project[] }) {
         role="region"
         aria-label="Side projects"
         tabIndex={0}
-        className="no-scrollbar flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto overscroll-x-contain px-4 pb-2 pt-6 outline-none focus-visible:ring-2 focus-visible:ring-ink/40 md:scroll-px-8 md:gap-6 md:px-8"
+        className="no-scrollbar flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto overscroll-x-contain px-4 pb-2 pt-8 md:pt-10 outline-none focus-visible:ring-2 focus-visible:ring-ink/40 md:scroll-px-8 md:gap-6 md:px-8"
       >
-        {projects.map((project) => (
-          <ProjectCard key={project.name} project={project} />
+        {projects.map((project, i) => (
+          <ProjectCard key={project.name} project={project} hint={hint && i === firstClipped} onUnclip={unclipped} />
         ))}
       </div>
       {scrollable && (

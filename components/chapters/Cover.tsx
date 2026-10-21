@@ -8,13 +8,14 @@ import { StickyNote } from "@/components/paper/StickyNote";
 import { chapters } from "@/content/chapters";
 import { site } from "@/content/site";
 
-// The working kit, scattered around the headline and tucked under its edges.
+// The working kit, scattered around the headline and tucked under its edges. The top-right corner
+// stays clear for the Resume tab and its note to hiring managers.
 const OBJECTS: ScatterItem[] = [
   { name: "sticky-note-stack", x: 5, y: 12, rotate: -6, from: "left", mobile: { x: 4, y: 57 } },
   { name: "wireframe-sheets", x: -9, y: 52, rotate: 6, from: "left", mobile: null },
-  { name: "dot-grid-notebook", x: 79, y: -8, rotate: 5, from: "right", mobile: { x: 40, y: 62 } },
+  { name: "dot-grid-notebook", x: 79, y: 20, rotate: 5, from: "right", mobile: { x: 40, y: 62 } },
   { name: "black-felt-pen", x: 84, y: 46, rotate: 8, from: "right", mobile: null },
-  { name: "binder-clips", x: 72, y: 63, rotate: -9, from: "right", mobile: { x: 70, y: 7, rotate: 10 } },
+  { name: "binder-clips", x: 72, y: 63, rotate: -9, from: "right", mobile: { x: 70, y: 17, rotate: 10 } },
   { name: "chisel-tip-marker", x: 25, y: 70, rotate: -62, from: "bottom", mobile: null },
 ];
 

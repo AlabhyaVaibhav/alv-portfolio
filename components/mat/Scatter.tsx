@@ -15,7 +15,8 @@ export type ScatterItem = {
 };
 
 // Decorative desk objects for a chapter. Render before the chapter's content so they sit underneath it.
-export function Scatter({ items }: { items: ScatterItem[] }) {
+// `blurred` throws them slightly out of focus, for chapters whose content should hold the eye.
+export function Scatter({ items, blurred = false }: { items: ScatterItem[]; blurred?: boolean }) {
   return items.map((o, i) => (
     <Piece
       key={o.name}
@@ -28,7 +29,13 @@ export function Scatter({ items }: { items: ScatterItem[] }) {
       mobile={o.mobile ? { rotate: o.rotate, ...o.mobile } : undefined}
       hideOnMobile={o.mobile === null}
     >
-      <DeskObject name={o.name} />
+      {blurred ? (
+        <div className="blur-[1.5px] brightness-[0.85] md:blur-[2.5px]">
+          <DeskObject name={o.name} />
+        </div>
+      ) : (
+        <DeskObject name={o.name} />
+      )}
     </Piece>
   ));
 }

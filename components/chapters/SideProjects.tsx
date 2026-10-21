@@ -6,7 +6,7 @@ import { chapters } from "@/content/chapters";
 import { projects } from "@/content/projects";
 import { featuredFirst } from "@/lib/projectOrder";
 
-// Planning artifacts peeking out from under the sheet. The bottom-right of the mat is kept clear for
+// Planning artifacts peeking out from under the sheet, out of focus so the carousel holds the eye. The bottom-right of the mat is kept clear for
 // the carousel's "more projects this way" hint, which yellow chalk can't be read over paper.
 const OBJECTS: ScatterItem[] = [
   { name: "kanban-mini-board", x: 52, y: -3, rotate: -4, from: "top", mobile: null },
@@ -18,7 +18,7 @@ const OBJECTS: ScatterItem[] = [
 export function SideProjects() {
   return (
     <Chapter meta={chapters[3]}>
-      <Scatter items={OBJECTS} />
+      <Scatter items={OBJECTS} blurred />
       <Piece x={4} y={12} rotate={-0.6} from="bottom" enterAt={0.03} mobile={{ x: 4, y: 12 }}>
         <ProjectCarousel projects={featuredFirst(projects)} />
       </Piece>

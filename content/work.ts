@@ -28,18 +28,19 @@ export const workHistory: Company[] = [
     location: "Bengaluru",
     focus: "worker safety",
     years: "2026–now",
-    // TODO(copy): sharpen these once there's something to show; no numbers yet, so none are claimed.
     highlights: [
-      { title: "Worker safety", metric: "Product · since Apr 2026", line: "Building worker safety as a product: keeping the people on the job safe." },
-      { title: "SDLC → AIDLC", metric: "Owning the migration", line: "Moving how the team builds from a classic SDLC to an AI-driven development lifecycle." },
+      { title: "Anton", metric: "~$12K saved · first 6 months", line: "An internal AI tool that runs the product lifecycle, discovery to delivery, across every role." },
+      { title: "PR review bot", metric: "~40% of merged PRs", line: "Reviews or authors ~40% of the PRs that merge: the team's move from SDLC to AIDLC." },
     ],
     positions: [
       {
-        title: "Product Manager",
+        title: "Product Manager, Worker Safety",
         dates: "Apr 2026 – Present",
         bullets: [
-          "Product manager for worker safety",
-          "Looking after the migration from SDLC to AIDLC (AI-driven development lifecycle)",
+          "Built Anton, an internal AI tool that runs the end-to-end product lifecycle from discovery to delivery, working across product, design, engineering and customer success; its internal alpha saved ~$12K in its first 6 months",
+          "Built a PR review bot that now reviews or authors ~40% of merged PRs, as part of moving the team from SDLC to an AI-driven development lifecycle (AIDLC)",
+          "Leading the AI stack for the worker safety application from ideation through MVP and V1, expected to add 5–10% revenue through upsells",
+          "Shaping a new incident management offering, a ~$5B market within worker safety",
         ],
       },
     ],
@@ -48,7 +49,6 @@ export const workHistory: Company[] = [
     name: "CommerceIQ",
     location: "Bengaluru",
     focus: "e-commerce analytics",
-    // TODO(copy): confirm the leaving month (joined Itron 6 Apr 2026).
     years: "2021–26",
     highlights: [
       { title: "Ally · AI Insights", metric: "New ARR + GDR", line: "Omni-channel AI recommendations surfaced inside the platform." },
@@ -59,7 +59,7 @@ export const workHistory: Company[] = [
     positions: [
       {
         title: "Product Manager, Platform",
-        dates: "Mar 2023 – Mar 2026",
+        dates: "Mar 2023 – Apr 2026",
         bullets: [
           "Led development of the Omni Channel AI Insights Platform (Ally), driving new ARR growth and strengthening GDR positioning by surfacing AI-driven recommendations",
           "Launched a cross-product reporting platform with automated decks, reducing manual reporting effort by 79% — leading to ~$500K annual savings and enabling CSMs to focus on strategic customer engagements",

@@ -1,0 +1,123 @@
+<!doctype html>
+<!--
+  Source for public/resume.pdf. Kept ATS-friendly on purpose: one column, no tables, icons or
+  images, standard section headings, plain-text contact details and one date format.
+  Rebuild with: npm run resume
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Alabhya Vaibhav - Product Manager - Resume</title>
+<style>
+  @page { size: A4; margin: 10mm 13mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Arial, Helvetica, sans-serif; font-size: 9.4pt; line-height: 1.28; color: #111; }
+  h1 { font-size: 19pt; line-height: 1.1; }
+  .headline { font-size: 11pt; margin-top: 2pt; }
+  .contact { margin-top: 4pt; }
+  a { color: inherit; text-decoration: none; }
+  h2 { font-size: 11pt; text-transform: uppercase; letter-spacing: 0.04em; border-bottom: 1px solid #111; padding-bottom: 1.5pt; margin: 8pt 0 4pt; }
+  .row span:last-child { white-space: nowrap; }
+  .company { font-weight: bold; }
+  .role.sub { margin-top: 3pt; }
+  .role { margin-top: 4.5pt; break-inside: avoid; }
+  .row { display: flex; justify-content: space-between; gap: 12pt; }
+  .title { font-weight: bold; }
+  ul { margin: 2pt 0 0 14pt; }
+  li { margin-top: 1pt; }
+  p + p { margin-top: 2pt; }
+</style>
+</head>
+<body>
+
+<h1>Alabhya Vaibhav</h1>
+<p class="headline">Product Manager | GenAI, B2B SaaS Platforms and Data Products</p>
+<p class="contact">Bengaluru, India | +91-9078025169 | alabhya.vaibhav1997@gmail.com</p>
+<p>LinkedIn: <a href="https://www.linkedin.com/in/alabhya-vaibhav/">linkedin.com/in/alabhya-vaibhav</a> | Portfolio: <a href="https://offmydesk.lol">offmydesk.lol</a> | GitHub: <a href="https://github.com/AlabhyaVaibhav">github.com/AlabhyaVaibhav</a></p>
+
+<h2>Summary</h2>
+<p>Product Manager with 7+ years across product, analytics and software engineering. Builds and scales AI-powered B2B platforms from customer discovery to launch and adoption, with engineering, design, customer success and sales.</p>
+
+<h2>Experience</h2>
+
+<div class="role">
+  <div class="row"><span class="title">Product Manager, Worker Safety</span><span>Apr 2026 – Present</span></div>
+  <div class="row"><span>Itron</span><span>Bengaluru, India</span></div>
+  <ul>
+    <li>Built Anton, an internal AI tool that runs the end-to-end product lifecycle from discovery to delivery across product, design, engineering and customer success; its internal alpha saved ~$12K in 6 months.</li>
+    <li>Built a PR review bot that reviews or authors ~40% of merged PRs, moving the team to an AI-driven SDLC.</li>
+    <li>Leading the worker safety app's AI stack from ideation to MVP and V1, expected to add 5–10% revenue via upsells.</li>
+    <li>Shaping a new incident management offering, a ~$5B market within worker safety.</li>
+  </ul>
+</div>
+
+<div class="role">
+  <div class="row"><span class="company">CommerceIQ</span><span>Bengaluru, India</span></div>
+  <div class="row"><span class="title">Product Manager, Platform</span><span>Mar 2023 – Apr 2026</span></div>
+  <ul>
+    <li>Led development of the Omni Channel AI Insights Platform (Ally), driving new ARR growth and strengthening GDR positioning by surfacing AI-driven recommendations.</li>
+    <li>Launched a cross-product reporting platform with automated decks, reducing manual reporting effort by 79%, saving ~$500K annually and freeing CSMs for strategic customer engagements.</li>
+    <li>Owned the end-to-end transition from legacy user management to a modular RBAC and user management system, unifying product offerings on one platform and boosting adoption 10% QoQ.</li>
+    <li>Ran customer discovery, launched 4 new features and set up adoption tracking to guide roadmap decisions.</li>
+  </ul>
+</div>
+
+<div class="role sub">
+  <div class="row"><span class="title">Senior Product Analyst, Professional Services</span><span>Oct 2022 – Mar 2023</span></div>
+  <ul>
+    <li>Co-led a strategy and planning product that enabled product-led growth, improving prospect conversion rates 3x.</li>
+    <li>Became the Amazon Marketing Cloud SME, leading strategic customer engagements that expanded the product suite.</li>
+  </ul>
+</div>
+
+<div class="role sub">
+  <div class="row"><span class="title">Product Analyst, Data Platform</span><span>Jun 2021 – Oct 2022</span></div>
+  <ul>
+    <li>Delivered strategic reporting for a global beverage company's tentpole campaigns, securing $400K in net new ARR.</li>
+    <li>Launched a one-page reporting product that standardised client reporting, saving ~5,000 analyst hours a year.</li>
+  </ul>
+</div>
+
+<div class="role">
+  <div class="row"><span class="title">Business Analyst, Store Insights</span><span>Apr 2020 – Jun 2021</span></div>
+  <div class="row"><span>Soroco</span><span>Bengaluru, India</span></div>
+  <ul>
+    <li>Built an LDA topic-modelling framework to cluster business-critical emails, enabling process mining and automation.</li>
+    <li>Delivered customer-facing reports and automation strategies that informed clients' operational decisions.</li>
+  </ul>
+</div>
+
+<div class="role">
+  <div class="row"><span class="title">Full Stack Developer, Quikr Jobs</span><span>Oct 2018 – Apr 2020</span></div>
+  <div class="row"><span>Quikr</span><span>Bengaluru, India</span></div>
+  <ul>
+    <li>Built a Progressive Web App to run third-party associate operations end to end, driving a 15% revenue increase.</li>
+    <li>Launched a classified ad category for recruiters to schedule and manage interviews, unlocking ~$150K annual revenue.</li>
+  </ul>
+</div>
+
+<div class="role">
+  <div class="row"><span class="title">IoT Research Intern, Labs</span><span>May 2018 – Aug 2018</span></div>
+  <div class="row"><span>McKinsey &amp; Company</span><span>Gurgaon, India</span></div>
+  <ul>
+    <li>Built real-time facial recognition and sensor data pipelines on AWS Kinesis, Lambda and DynamoDB.</li>
+  </ul>
+</div>
+
+<h2>Skills</h2>
+<p><b>Product:</b> Product Strategy and Roadmap, Product Lifecycle Management, Generative AI and LLM Integration, Go-to-Market (GTM) Strategy, Customer Research and Product Discovery, A/B Testing and Experimentation, UX Design, Data Analytics, Platform Optimisation, Stakeholder Management, Cross-Functional Leadership</p>
+<p><b>Analytics:</b> SQL, Databricks, Tableau, Excel, Google Analytics, Heap</p>
+<p><b>Tools:</b> Jira, Confluence, Productboard, Figma, Miro, Lovable, Claude, ChatGPT, AWS, API Integrations, Jenkins</p>
+
+<h2>Education</h2>
+<div class="row"><span><b>B.Tech, Computer Science and Engineering</b> | KIIT University, Bhubaneswar | CGPA 8.5/10</span><span>2015 – 2019</span></div>
+
+<h2>Achievements</h2>
+<ul>
+  <li>Placed 2nd in the company-wide AI hackathon at CommerceIQ.</li>
+  <li>Won 4 quarterly recognition awards at CommerceIQ.</li>
+</ul>
+
+
+</body>
+</html>

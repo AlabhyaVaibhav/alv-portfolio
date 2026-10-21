@@ -6,10 +6,9 @@ export type BaileySlot = {
   src?: string;
 };
 
-// TODO(copy): captions are placeholders.
 export const bailey: BaileySlot[] = [
-  { id: "walk", caption: "walk o'clock", alt: "Bailey out on a walk" },
-  { id: "copilot", caption: "co-pilot", alt: "Bailey riding along on a drive" },
-  { id: "play", caption: "zoomies", alt: "Bailey mid-play" },
-  { id: "nap", caption: "post-zoomies", alt: "Bailey napping" },
+  { id: "walk", caption: "walk o'clock", alt: "Bailey in a harness, perched on a rock in the garden", src: "/bailey/walk.jpg" },
+  { id: "copilot", caption: "co-pilot", alt: "Alabhya holding Bailey by the car on a road trip", src: "/bailey/copilot.jpg" },
+  { id: "play", caption: "zoomies", alt: "Bailey on top of the sofa, caught on the home camera", src: "/bailey/zoomies.jpg" },
+  { id: "nap", caption: "post-zoomies", alt: "Bailey asleep on a glass side table", src: "/bailey/nap.jpg" },
 ];

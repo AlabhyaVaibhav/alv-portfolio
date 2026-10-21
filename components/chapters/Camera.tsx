@@ -3,7 +3,10 @@
 import { useState } from "react";
 import { Chapter } from "@/components/mat/Chapter";
 import { Piece } from "@/components/mat/Piece";
+import { StickerScatter, place } from "@/components/mat/StickerScatter";
+import { cameraKit } from "@/content/skills";
 import { Lightbox } from "@/components/photography/Lightbox";
+import { CommissionCard } from "@/components/paper/CommissionCard";
 import { MarkerNote } from "@/components/paper/MarkerNote";
 import { Polaroid } from "@/components/paper/Polaroid";
 import { Tape } from "@/components/paper/Tape";
@@ -23,6 +26,16 @@ const PILES = [
 
 // Small per-print tilts so a pile reads as tossed-down prints, not a grid.
 const TILT = ["-rotate-3", "rotate-2", "rotate-1", "-rotate-2"];
+
+// What the photos were shot and edited with, stuck along the bottom of the mat. Phones keep one: the
+// rest of that strip holds the commissions card.
+const KIT_STICKERS = place(cameraKit, [
+  { x: 4, y: 80, rotate: -4, mobile: null },
+  { x: 17, y: 88, rotate: 5, mobile: null },
+  { x: 68, y: 79, rotate: 3, mobile: { x: 72, y: 90 } },
+  { x: 84, y: 77, rotate: -6, mobile: null, className: "md:max-lg:hidden" },
+  { x: 87, y: 91, rotate: -2, mobile: null, className: "md:max-lg:hidden" },
+]);
 
 export function Camera() {
   const piles = groupPhotos(photography, PHOTO_GROUPS.map((g) => g.id), PER_PILE);
@@ -84,12 +97,17 @@ export function Camera() {
         {/* TODO(copy) */}
         <MarkerNote arrow="up">{photography.length} prints, three piles. click one to flip through</MarkerNote>
       </Piece>
+      {/* Across the open top of the mat, between the chapter label and the Resume tab. */}
+      <Piece x={29} y={1} rotate={-1} from="top" enterAt={0.16} mobile={{ x: 4, y: 84, rotate: -1 }}>
+        <CommissionCard />
+      </Piece>
       <Lightbox
         slots={open ? piles[open.pile].all : []}
         activeIndex={open ? open.index : null}
         onClose={() => setOpen(null)}
         onNavigate={(index) => setOpen((o) => (o ? { ...o, index } : o))}
       />
+      <StickerScatter stickers={KIT_STICKERS} from="bottom" enterAt={0.1} />
     </Chapter>
   );
 }
