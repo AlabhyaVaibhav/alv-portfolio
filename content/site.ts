@@ -13,6 +13,8 @@ export type SiteContent = {
   resumeHref: string;
   baileyNote: string;
   closingNote: string;
+  // The "commissions open" card in the camera chapter: the shoots Alabhya takes on.
+  commissions: string[];
 };
 
 export const site: SiteContent = {
@@ -32,4 +34,5 @@ export const site: SiteContent = {
   baileyNote: "Human works too much. I supervise. — B",
   closingNote:
     "Always happy to talk product, photography, or what I'm building next.",
+  commissions: ["pet portraits", "self-portraits", "a photo walk around the city"],
 };

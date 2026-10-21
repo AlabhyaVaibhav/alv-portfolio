@@ -53,6 +53,8 @@ export const projects: Project[] = [
     name: "Twine",
     kind: "internal",
     featured: true,
+    image: "/projects/twine.webp",
+    imageBg: "#252525",
     blurb:
       "Your camera roll is full of stories nobody has heard. Twine's companion talks you through a moment, then weaves it into a keepsake you share privately with the people who were there.",
     note: "in beta",
@@ -68,6 +70,7 @@ export const projects: Project[] = [
     // TODO(copy): add your role, the timeline and the tools, plus what you learned.
     page: {
       eyebrow: "stories, woven",
+      hero: "/projects/twine.webp",
       dek: "A companion that helps you tell the story behind a photo, then turns it into a keepsake for the people who were there.",
       tags: ["Consumer app", "Storytelling"],
       facts: [
@@ -259,6 +262,8 @@ export const projects: Project[] = [
   {
     name: "PMs Are Becoming Builders Again!",
     kind: "writing",
+    image: "/projects/pms-are-builders.webp",
+    imageBg: "#fdf9f5",
     blurb:
       "Building got cheap, so being wrong got cheap too. The PM bottleneck has moved from capacity to judgment: what's worth building, and what good looks like.",
     link: "https://www.linkedin.com/pulse/pms-becoming-builders-again-alabhya-vaibhav-hb6hf/",

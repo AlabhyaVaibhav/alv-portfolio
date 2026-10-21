@@ -2,8 +2,8 @@
 
 import { useEffect, useState, useSyncExternalStore } from "react";
 import { chapters } from "@/content/chapters";
-import { site } from "@/content/site";
 import { activeChapterIndex, holdScrollY } from "@/lib/chapterScroll";
+import { ResumeButton } from "@/components/paper/ResumeButton";
 import { Squiggle } from "@/components/paper/Squiggle";
 import { usePrefersReducedMotion } from "./usePrefersReducedMotion";
 
@@ -51,14 +51,9 @@ export function ChapterNav() {
 
   return (
     // The resume sits beside the chapter menu in every chapter, so a recruiter is always one click away.
-    <div className="fixed right-3 top-3 z-40 flex items-start gap-2 md:right-5 md:top-5">
-      <a
-        href={site.resumeHref}
-        download
-        className="drop-object bg-sticky-yellow px-3 py-1.5 font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-ink transition-transform hover:-translate-y-0.5 focus-visible:-translate-y-0.5"
-      >
-        Resume ↓
-      </a>
+    <div className="fixed right-3 top-3 z-40 flex items-start gap-4 md:right-5 md:top-5">
+      {/* The note for hiring managers shows on the cover only, where they land; after that the red tab speaks for itself. */}
+      <ResumeButton note={active === 0} />
       <nav aria-label="Chapters" className="flex flex-col items-end">
         <button
           type="button"

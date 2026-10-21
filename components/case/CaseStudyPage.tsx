@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ResumeButton } from "@/components/paper/ResumeButton";
 import { Tape } from "@/components/paper/Tape";
 import type { CaseCard, CaseFact, CasePage, Project } from "@/content/projects";
 import { PaperArrival } from "./PaperArrival";
-import { site } from "@/content/site";
 import { projectSlug } from "@/lib/projectPages";
 
 type CaseStudyPageProps = {
@@ -29,13 +29,7 @@ export function CaseStudyPage({ project, previous, next }: CaseStudyPageProps) {
         >
           ← back to the desk
         </Link>
-        <a
-          href={site.resumeHref}
-          download
-          className="drop-object bg-sticky-yellow px-3 py-1.5 font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-ink transition-transform hover:-translate-y-0.5"
-        >
-          Resume ↓
-        </a>
+        <ResumeButton note />
       </nav>
 
       <article className="drop-object relative mx-auto mt-5 max-w-[1180px] rounded-[20px] bg-paper px-5 py-8 font-body text-ink md:mt-7 md:rounded-[28px] md:px-12 md:py-14">
